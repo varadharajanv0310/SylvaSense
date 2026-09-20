@@ -16,7 +16,7 @@ import fitz
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from deck_content import BODY, DIAGRAM_AT, FOOTERS, FT  # noqa: E402
+from deck_content import BODY, DIAGRAM_AT, FOOTERS, LINKS, FT  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -106,5 +106,25 @@ for pno in range(1, 9):
     pages.append(im)
 
 pages[0].save(PDF_OUT, save_all=True, append_images=pages[1:], resolution=150)
+
+# The preview is rasterised, so the references carry no text to hyperlink.
+# Add link rectangles over where those lines were drawn, measured with the
+# same font the render used so the hotspot matches what the reader sees.
+out = fitz.open(PDF_OUT)
+scale = out[0].rect.width / 1440.0
+linked = 0
+for pno in range(1, 9):
+    page = out[pno - 1]
+    for d in BODY.get(pno, []):
+        url = LINKS.get(d["text"])
+        if not url:
+            continue
+        f = face(d["size"], d["bold"])
+        w = f.getlength(d["text"]) / S
+        rect = fitz.Rect(d["x"] * scale, (d["y"] - 4) * scale,
+                         (d["x"] + w) * scale, (d["y"] + d["size"] + 4) * scale)
+        page.insert_link({"kind": fitz.LINK_URI, "from": rect, "uri": url})
+        linked += 1
+out.saveIncr()
 print(f"preview -> {OUT}")
-print(f"wrote {PDF_OUT}")
+print(f"wrote {PDF_OUT}  ({linked} reference links clickable)")

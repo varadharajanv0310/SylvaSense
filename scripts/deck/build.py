@@ -24,7 +24,8 @@ from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from deck_content import BODY, DIAGRAM_AT, FOOTERS, CY, WH, FT, AM  # noqa: E402
+from deck_content import (BODY, DIAGRAM_AT, DEMO_URL, FOOTERS, LINKS,  # noqa: E402
+                          CY, WH, FT, AM)
 
 TEMPLATE = os.environ.get(
     "ORION_TEMPLATE",
@@ -70,6 +71,10 @@ def emit(slide, d):
     r.font.size = Pt(round(d["size"], 1))
     r.font.bold = d["bold"]
     r.font.color.rgb = RGBColor.from_string(d["colour"].upper())
+    # a reference that cannot be followed is a claim, not a citation
+    url = LINKS.get(d["text"])
+    if url:
+        r.hyperlink.address = url
 
 
 def frame(slide, name, x, y, w, h):

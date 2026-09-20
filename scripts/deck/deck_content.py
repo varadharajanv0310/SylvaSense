@@ -215,4 +215,35 @@ FOOTERS = {
        "illustrations • First results measured on 6 sites",
 }
 
+# ---------------------------------------------------------------- links ----
+# Every one of these was checked with a request before being put in the deck.
+# Two entries are deliberately absent: the ORION problem-statement page, whose
+# URL I do not have, and the Nakada preprint, which I could not resolve. An
+# unverified link on a references slide is worse than no link.
+#
+# A 403 from doi.org or academic.oup.com is bot-blocking, not a dead link;
+# those open normally in a browser.
+LINKS = {
+    "Sentinel-1 processing": "https://sentiwiki.copernicus.eu/web/s1-processing",
+    "Sentinel-2 resolution": "https://sentiwiki.copernicus.eu/web/s2-products",
+    "NASA GEDI L4A · footprints + quality":
+        "https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=2299",
+    "NEON 0.1 m RGB": "https://data.neonscience.org/data-products/DP3.30010.001",
+    "NEON 1 m CHM": "https://data.neonscience.org/data-products/DP3.30015.001",
+    "Cheng et al., 2022": "https://arxiv.org/abs/2112.01527",
+    "Detectree2 · Ball et al., 2023": "https://github.com/PatBall1/detectree2",
+    "XGBoost · official quantile objective":
+        "https://xgboost.readthedocs.io/en/stable/parameter.html",
+    "Earth Engine CCDC":
+        "https://developers.google.com/earth-engine/apidocs/"
+        "ee-algorithms-temporalsegmentation-ccdc",
+    "TiTiler": "https://developmentseed.org/titiler/",
+    "RESOLVE ecoregions · Dinerstein et al., 2017":
+        "https://doi.org/10.1093/biosci/bix014",
+    "IPCC 2006 · Forest Land · Table 4.3":
+        "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/"
+        "V4_04_Ch4_Forest_Land.pdf",
+}
 
+#: set this once the site is deployed; it becomes slide 2's footer link
+DEMO_URL = ""
