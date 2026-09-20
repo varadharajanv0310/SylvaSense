@@ -43,7 +43,7 @@ FONT = "Inter"          # the family the template already ships with
 TITLE_FIELDS = [
     "Problem Statement ID: ORION-PS-03",
     "Problem Statement Title: SylvaSense",
-    "Team ID: [ FILL THIS IN ]",
+    "Team ID: ",
     "Team Name: Order of One",
 ]
 

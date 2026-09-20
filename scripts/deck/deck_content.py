@@ -68,12 +68,14 @@ _outputs = [
     ("04", "Live polygon inference", "Draw an area; evidence returns with its sources"),
 ]
 for i, (n, head, sub) in enumerate(_outputs):
-    y = 502 + i * 61
+    y = 492 + i * 54
     BODY[2] += [L(80, y, 24.9, CY, True, n),
                 L(144, y - 2, 26.0, WH, True, head),
                 L(144, y + 28, 19.0, FT, False, sub)]
 
 # ---------------------------------------------------------------- 3 -------
+BODY[2] += [L(78, 722, 27.0, CY, True, "Live demo  →  sylvasense-orion.vercel.app")]
+
 BODY[3] = [L(78, 166, 36.0, WH, True, "Three scales. One pipeline.")]
 for i, (eye, claim, e1, e2) in enumerate([
     ("CROWNS  /  FINE AERIAL IMAGERY", "Mask2Former + Swin-S",
@@ -204,7 +206,7 @@ for _col, _entries in (
             BODY[8].append(L(_col + 64 + _dx, _y + 43, 21.1, REF, False, _txt))
 
 FOOTERS = {
-    2: "Four outputs from one request • Live system, first results on 6 sites • sylvasense-orion.vercel.app",
+    2: "Four outputs from one request • Crown-scale aerial imagery + regional satellite monitoring • Live system, first results on 6 sites",
     3: "Mg/ha \u00d7 ha = Mg \u2022 CF starts at 0.47; refine by forest type [10] \u2022 Crown / biomass / change methods: [2\u20138]",
     4: "Measured on 6 sites, 2024\u20132026 \u2022 60 automated tests \u2022 Rond\u00f4nia, Brazil",
     6: "Prescribed stack, with task queues and COG tile serving added for practical inference [1,7,8]",
@@ -243,7 +245,7 @@ LINKS = {
     "TiTiler": "https://developmentseed.org/titiler/",
     "RESOLVE ecoregions · Dinerstein et al., 2017":
         "https://doi.org/10.1093/biosci/bix014",
-    "Four outputs from one request • Live system, first results on 6 sites • sylvasense-orion.vercel.app": DEMO_URL,
+    "Live demo  →  sylvasense-orion.vercel.app": DEMO_URL,
     "IPCC 2006 · Forest Land · Table 4.3":
         "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/"
         "V4_04_Ch4_Forest_Land.pdf",
