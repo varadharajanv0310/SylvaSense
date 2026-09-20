@@ -8,10 +8,10 @@
 
 .con-top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
-  gap: 60px 74px;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 470px);
+  gap: 60px 80px;
   align-items: start;
-  padding: 92px 0 68px;
+  padding: 104px 0 74px;
   border-bottom: 1px solid var(--line);
 }
 .con-top .eyebrow {
@@ -24,9 +24,9 @@
 .con-top h1 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(38px, 5vw, 76px);
-  line-height: 1;
-  letter-spacing: -0.026em;
+  font-size: clamp(44px, 5.9vw, 92px);
+  line-height: 0.99;
+  letter-spacing: -0.028em;
 }
 .con-top h1 em {
   color: var(--leaf);
@@ -41,9 +41,12 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 30px 30px 28px;
+  padding: 32px 32px 30px;
   background: var(--panel);
   border: 1px solid var(--rule);
+  /* it follows you down through the explainer, so Run is always in reach */
+  position: sticky;
+  top: 26px;
 }
 .con-modes {
   display: flex;
@@ -277,4 +280,128 @@
   line-height: 1.45;
   color: var(--ink);
   word-break: break-word;
+}
+
+/* ---- what a run does: the page has to say something before you press it ---- */
+.con-explain {
+  padding: 78px 0 0;
+}
+.con-explain .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #b5c4a2;
+}
+.con-explain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0 56px;
+  margin-top: 44px;
+}
+.con-explain-grid > article {
+  padding: 30px 0 34px;
+  border-top: 1px solid var(--rule);
+}
+.con-explain-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--leaf);
+}
+.con-explain h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: -0.015em;
+  margin: 14px 0 0;
+}
+.con-explain-claim {
+  margin: 12px 0 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.con-explain-body {
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.68;
+  color: #9ea298;
+}
+.con-explain-cost {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--muted);
+}
+.con-explain-foot {
+  max-width: 62ch;
+  margin-top: 40px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  font-size: 14px;
+  line-height: 1.7;
+  color: #9ea298;
+}
+
+/* ---- the six sites, visible rather than hidden in a select ---- */
+.con-sites {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+.con-sites button {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 4px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  color: var(--muted);
+  transition: color 0.22s, padding-left 0.22s;
+}
+.con-sites button:hover {
+  color: var(--ink);
+  padding-left: 8px;
+}
+.con-sites button.is-active {
+  color: var(--ink);
+}
+.con-site-n {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+}
+.con-sites button.is-active .con-site-n {
+  color: var(--leaf);
+  opacity: 1;
+}
+.con-site-name {
+  font-size: 13.5px;
+  line-height: 1.35;
+}
+.con-sites .rec-dot[data-state="confirmed"] {
+  background: var(--leaf-dim);
+}
+.con-sites .rec-dot[data-state="candidate"] {
+  background: var(--amber);
+}
+
+/* the hero facts read tighter here than on the record page */
+.con-facts {
+  margin-top: 46px;
+}
+.con-facts dd {
+  font-size: 30px;
+}
+
+/* The first draft pinned the footer with min-height + margin-top:auto, which
+   left a dead band of black above it. The explainer guarantees the page is
+   long enough that pinning was solving a problem that no longer exists, so
+   the footer simply follows the content. */
+.con > .rec-foot {
+  margin-top: 84px;
+  padding-top: 40px;
 }

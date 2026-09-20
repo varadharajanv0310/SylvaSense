@@ -280,10 +280,28 @@ export default function ConsolePage() {
             <em>Get the evidence.</em>
           </h1>
           <p className="rec-lede">
-            This is the backend itself, not a recording. Pick one of the
-            verified sites for an answer that is already cached, or give it
-            coordinates it has never seen and wait while it reads the scenes.
+            This is the instrument itself, not a recording. Point it at one of
+            the verified sites for an answer already on disk, or at ground it
+            has never seen and watch it read the archive.
           </p>
+          <dl className="rec-facts con-facts">
+            <div>
+              <dt>Independent sources</dt>
+              <dd>7</dd>
+            </div>
+            <div>
+              <dt>Verified sites</dt>
+              <dd>{sites.length || "—"}</dd>
+            </div>
+            <div>
+              <dt>Grid</dt>
+              <dd>100 m</dd>
+            </div>
+            <div>
+              <dt>Interval</dt>
+              <dd>90%</dd>
+            </div>
+          </dl>
         </div>
 
         <form
@@ -306,16 +324,28 @@ export default function ConsolePage() {
           </div>
 
           {mode === "site" ? (
-            <label className="con-field">
-              <span>SITE</span>
-              <select value={siteId} onChange={(e) => setSiteId(e.target.value)}>
-                {sites.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name} {s.state === "confirmed" ? "· confirmed" : ""}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <nav className="con-sites" aria-label="Verified sites">
+              {sites.map((s, i) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  className={s.id === siteId ? "is-active" : ""}
+                  aria-pressed={s.id === siteId}
+                  onClick={() => setSiteId(s.id)}
+                >
+                  <span className="con-site-n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="con-site-name">{s.name}</span>
+                  <span
+                    className="rec-dot"
+                    data-state={s.state}
+                    title={s.state === "confirmed" ? "confirmed" : "candidate"}
+                  />
+                </button>
+              ))}
+              {!sites.length && (
+                <p className="con-cost">Waiting for the backend to list its sites…</p>
+              )}
+            </nav>
           ) : mode === "file" ? (
             <div className="con-upload">
               <label className="con-drop">
@@ -425,6 +455,53 @@ export default function ConsolePage() {
           {note && <p className="con-note">{note}</p>}
         </form>
       </section>
+
+      {phase === "idle" && !evidence && !disturbance && !biomass && (
+        <section className="con-explain">
+          <p className="eyebrow">
+            <i className="tiny-line" />
+            WHAT A RUN ACTUALLY DOES
+          </p>
+          <div className="con-explain-grid">
+            {[
+              [
+                "01",
+                "Convergence",
+                "Seven sources, none of them decisive alone.",
+                "C-band radar, L-band radar, optical, lidar and three land-cover products, each free to fail without taking the request down. Every value comes back with the sensor that produced it, the window it covers and the method behind it.",
+                "Seconds once cached",
+              ],
+              [
+                "02",
+                "Change",
+                "A drop has to persist before it counts.",
+                "A harmonic baseline learns the site's own season, then each observation updates a per-pixel posterior. Crossings that do not hold stay provisional. Below its power threshold the detector confirms nothing and says so — the alternative was calling a national park clear-felled.",
+                "Minutes on new ground",
+              ],
+              [
+                "03",
+                "Biomass",
+                "An interval that was checked, not claimed.",
+                "GEDI footprints are the calibration target; Sentinel features carry the estimate between them. Intervals come from split conformal over spatially blocked folds, and coverage is measured on blocks used for neither training nor calibration. Sometimes it fails, and the page shows it failing.",
+                "Minutes on new ground",
+              ],
+            ].map(([n, title, claim, body, cost]) => (
+              <article key={n as string}>
+                <span className="con-explain-n">{n}</span>
+                <h3>{title}</h3>
+                <p className="con-explain-claim">{claim}</p>
+                <p className="con-explain-body">{body}</p>
+                <span className="meta con-explain-cost">{cost}</span>
+              </article>
+            ))}
+          </div>
+          <p className="con-explain-foot">
+            Nothing here is precomputed for show. The six verified sites are
+            cached because they have been run before, not because their answers
+            were written down.
+          </p>
+        </section>
+      )}
 
       {phase === "running" && (
         <section className="con-progress">
