@@ -17,6 +17,7 @@ import "./console.css";
  * ------------------------------------------------------------------ */
 
 const API = "http://127.0.0.1:8000";
+const SNAPSHOT = "/sylvasense-report.json";
 
 type Obs = {
   key: string;
@@ -64,6 +65,12 @@ type Biomass = {
 };
 
 type Site = { id: string; name: string; state: string; centroid: number[]; bbox: number[] };
+type CapturedSite = {
+  fixture: Site;
+  evidence?: Evidence;
+  disturbance?: Obs[];
+  biomass?: Biomass;
+};
 type Footprint = {
   kind: "raster" | "geojson";
   filename: string;
@@ -117,6 +124,10 @@ export default function ConsolePage() {
   const abort = useRef<AbortController | null>(null);
   const [upload, setUpload] = useState<Footprint | null>(null);
   const [uploading, setUploading] = useState(false);
+  // On a deployed build there is no local API, so the verified sites are
+  // served from the same frozen capture /record uses. Coordinates and upload
+  // genuinely need the instrument and say so rather than failing silently.
+  const [capture, setCapture] = useState<Record<string, CapturedSite>>({});
 
   useEffect(() => {
     fetch(`${API}/health`)
@@ -126,6 +137,18 @@ export default function ConsolePage() {
     fetch(`${API}/fixtures`)
       .then((r) => (r.ok ? (r.json() as Promise<{ fixtures: Site[] }>) : null))
       .then((j) => j && setSites(j.fixtures))
+      .catch(() => undefined);
+
+    fetch(SNAPSHOT)
+      .then((r) => (r.ok ? (r.json() as Promise<{ sites: CapturedSite[] }>) : null))
+      .then((j) => {
+        if (!j?.sites) return;
+        const byId: Record<string, CapturedSite> = {};
+        j.sites.forEach((x) => (byId[x.fixture.id] = x));
+        setCapture(byId);
+        // with no instrument, the capture is where the site list comes from
+        setSites((cur) => (cur.length ? cur : j.sites.map((x) => x.fixture)));
+      })
       .catch(() => undefined);
   }, []);
 
@@ -150,6 +173,16 @@ export default function ConsolePage() {
   }, [mode, siteId, sites, lon, lat, size, upload]);
 
   const run = async () => {
+    // no instrument, but a captured answer exists for this site
+    if (online === false && mode === "site" && capture[siteId]) {
+      const c = capture[siteId];
+      setEvidence(c.evidence ?? null);
+      setDisturbance(c.disturbance ?? null);
+      setBiomass(c.biomass ?? null);
+      setPhase("done");
+      setNote("");
+      return;
+    }
     const geom = geometry();
     if (!geom) {
       setNote("That area could not be read. Check the coordinates.");
@@ -264,7 +297,11 @@ export default function ConsolePage() {
         <span className="meta rec-head-mid">THE CONSOLE</span>
         <span className="meta rec-stamp" data-live={online ? "yes" : "no"}>
           <i />
-          {online === null ? "CONNECTING" : online ? "INSTRUMENT ONLINE" : "BACKEND UNREACHABLE"}
+          {online === null
+            ? "CONNECTING"
+            : online
+              ? "INSTRUMENT ONLINE"
+              : "REPLAYING CAPTURED RUNS"}
         </span>
       </header>
 
@@ -315,10 +352,20 @@ export default function ConsolePage() {
             <button type="button" aria-pressed={mode === "site"} onClick={() => setMode("site")}>
               Verified site
             </button>
-            <button type="button" aria-pressed={mode === "point"} onClick={() => setMode("point")}>
+            <button
+              type="button"
+              aria-pressed={mode === "point"}
+              disabled={online === false}
+              onClick={() => setMode("point")}
+            >
               Coordinates
             </button>
-            <button type="button" aria-pressed={mode === "file"} onClick={() => setMode("file")}>
+            <button
+              type="button"
+              aria-pressed={mode === "file"}
+              disabled={online === false}
+              onClick={() => setMode("file")}
+            >
               Upload
             </button>
           </div>
@@ -440,12 +487,23 @@ export default function ConsolePage() {
                 Cancel · {elapsed}s
               </button>
             ) : (
-              <button type="submit" className="con-run" disabled={online === false || (mode === "file" && !upload)}>
+              <button
+                type="submit"
+                className="con-run"
+                disabled={
+                  (online === false && !(mode === "site" && capture[siteId])) ||
+                  (mode === "file" && !upload)
+                }
+              >
                 Run the analysis <span>→</span>
               </button>
             )}
             <p className="con-cost">
-              {mode === "site"
+              {online === false
+                ? mode === "site"
+                  ? "The instrument is not reachable, so this replays the captured run for this site."
+                  : "Coordinates and upload need the instrument running locally."
+                : mode === "site"
                 ? "Cached: this returns in milliseconds."
                 : mode === "file" && !upload
                   ? "Choose a georeferenced file to continue."

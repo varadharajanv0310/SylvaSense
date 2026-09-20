@@ -26,10 +26,13 @@ from pptx.util import Inches, Pt
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from deck_content import BODY, DIAGRAM_AT, FOOTERS, CY, WH, FT, AM  # noqa: E402
 
-TEMPLATE = r"C:\Users\varad\Downloads\ORION_1.0_Template.pptx"
-BASE = r"C:\Users\varad\AppData\Local\Temp\claude\D--Sathyabama-Orion-Claude\262dadaf-978b-40de-b73d-aad2bb1e74bb\scratchpad"
-DIAGRAMS = os.path.join(BASE, "diagrams")
-OUT = r"D:\Sathyabama ORION Build\Order_of_One_ORION1.0_v2.pptx"
+TEMPLATE = os.environ.get(
+    "ORION_TEMPLATE",
+    os.path.join(os.path.expanduser("~"), "Downloads", "ORION_1.0_Template.pptx"))
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
+DIAGRAMS = os.path.join(HERE, "diagrams")
+OUT = os.path.join(REPO, "Order_of_One_ORION1.0_v2.pptx")
 
 # the template is 1440 x 810 pt, so deck points are just points
 K = 1.0 / 72.0          # deck pt -> inches

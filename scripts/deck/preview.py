@@ -18,10 +18,13 @@ from PIL import Image, ImageDraw, ImageFont
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from deck_content import BODY, DIAGRAM_AT, FOOTERS, FT  # noqa: E402
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-PLATES, DIAGRAMS = os.path.join(BASE, "plates"), os.path.join(BASE, "diagrams")
-OUT = os.path.join(BASE, "preview3")
-PDF_OUT = r"D:\Sathyabama ORION Build\Order_of_One_ORION1.0_v2.pdf"
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(os.path.dirname(HERE))
+DIAGRAMS = os.path.join(HERE, "diagrams")
+# background plates are large and regenerable, so they stay out of the repo
+PLATES = os.environ.get("ORION_PLATES", os.path.join(HERE, "plates"))
+OUT = os.path.join(HERE, "preview")
+PDF_OUT = os.path.join(REPO, "Order_of_One_ORION1.0_v2.pdf")
 os.makedirs(OUT, exist_ok=True)
 
 S = 2
@@ -38,7 +41,9 @@ def face(sz, bold):
     return _F[key]
 
 
-doc = fitz.open(r"C:\Users\varad\Downloads\Order_of_One_ORION1.0.pdf")
+doc = fitz.open(os.environ.get(
+    "ORION_SOURCE_PDF",
+    os.path.join(os.path.expanduser("~"), "Downloads", "Order_of_One_ORION1.0.pdf")))
 pages = []
 
 for pno in range(1, 9):

@@ -405,3 +405,13 @@
   margin-top: 84px;
   padding-top: 40px;
 }
+
+/* a mode that needs the local instrument, when there isn't one */
+.con-modes button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.con-modes button:disabled:hover {
+  background: none;
+  color: var(--muted);
+}

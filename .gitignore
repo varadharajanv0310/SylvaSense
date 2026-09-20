@@ -66,3 +66,7 @@ backend/fixtures_observed.json
 /build/
 tsconfig.tsbuildinfo
 dev.log
+
+# deck preview renders (regenerable, large)
+scripts/deck/preview/
+scripts/deck/plates/
