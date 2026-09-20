@@ -1,38 +1,4 @@
-"""
-Rebuild the ORION deck with restructured body copy.
-
-The first pass swapped text span-for-span, which inherited the template's
-density: four to six lines a slide, each a bare noun phrase. This lays the
-body out from scratch instead. Every block now runs label / claim / evidence,
-so the slide says what it does *and* why that is worth anything, and still
-fits on one breath.
-
-Titles, footers and page numbers are kept from the original at their original
-coordinates. Only the body is re-laid.
-"""
-import os
-import sys
-
-sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-
-import fitz
-from pptx import Presentation
-from pptx.dml.color import RGBColor
-from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
-from pptx.util import Inches, Pt
-
-SRC = r"C:\Users\varad\Downloads\Order_of_One_ORION1.0.pdf"
-BASE = r"C:\Users\varad\AppData\Local\Temp\claude\D--Sathyabama-Orion-Claude\262dadaf-978b-40de-b73d-aad2bb1e74bb\scratchpad"
-PLATES = os.path.join(BASE, "plates")
-OUT = r"D:\Sathyabama ORION Build\Order_of_One_ORION1.0_v2.pptx"
-PREVIEW = os.path.join(BASE, "preview2")
-DIAGRAMS = os.path.join(BASE, "diagrams")
-
-DECK_W, DECK_H = 1440.0, 810.0
-SLIDE_W, SLIDE_H = 13.3333, 7.5
-K = SLIDE_W / DECK_W
-FS = (SLIDE_W * 72.0) / DECK_W
-FONT = "Segoe UI"
+"""Deck copy and diagram placement, shared by the builder."""
 
 CY = "b6faff"      # cyan accent, from the template
 WH = "ffffff"
@@ -86,12 +52,6 @@ def block(x, y, eyebrow, claim, evidence, *, claim_size=29, ev_size=23,
 
 
 BODY = {}
-
-# ---------------------------------------------------------------- 1 -------
-BODY[1] = [
-    L(256.8, 570.1, 48.5, WH, False, "Team ID:  [ FILL THIS IN ]"),
-    L(256.8, 712.0, 34.0, CY, False, "Live demo:  [ PASTE YOUR URL ]"),
-]
 
 # ---------------------------------------------------------------- 2 -------
 BODY[2] = [
@@ -205,184 +165,54 @@ SPAN_EDITS = {
     (8, "Primary references \u2022 Accessed 18 September 2026 \u2022 Proposed methods and synthetic 3D illustrations; no measured performance claimed"):
         "Primary references \u2022 Accessed 20 September 2026 \u2022 Synthetic 3D illustrations \u2022 First results measured on 6 sites",
 }
+REF = "a6f7ff"      # the pale cyan the reference sub-lines use
+
+# The blank template carries no reference list and no footers; both were in
+# the team's own export, so both are re-added here rather than lost.
+BODY[8] = []
+for _col, _entries in (
+    (78, [
+        ("01", "Official scope + submission rules",
+         [("ORION PS-03 · Microsoft Club SIST", 0)]),
+        ("02", "Satellite observations",
+         [("Sentinel-1 processing", 0), ("Sentinel-2 resolution", 277)]),
+        ("03", "Biomass reference targets",
+         [("NASA GEDI L4A · footprints + quality", 0)]),
+        ("04", "Crown-scale data",
+         [("NEON 0.1 m RGB", 0), ("NEON 1 m CHM", 229)]),
+        ("05", "Mask2Former + crown evidence",
+         [("Cheng et al., 2022", 0), ("Nakada et al., 2026 preprint", 231)]),
+    ]),
+    (770, [
+        ("06", "Crown segmentation benchmark",
+         [("Detectree2 · Ball et al., 2023", 0)]),
+        ("07", "Quantile biomass regression",
+         [("XGBoost · official quantile objective", 0)]),
+        ("08", "Time series + raster serving",
+         [("Earth Engine CCDC", 0), ("TiTiler", 263)]),
+        ("09", "Biome labels",
+         [("RESOLVE ecoregions · Dinerstein et al., 2017", 0)]),
+        ("10", "Biomass-to-carbon formulation",
+         [("IPCC 2006 · Forest Land · Table 4.3", 0)]),
+    ]),
+):
+    for _i, (_n, _head, _subs) in enumerate(_entries):
+        _y = 204 + _i * 103
+        BODY[8] += [L(_col, _y, 26.0, CY, True, _n),
+                    L(_col + 64, _y, 29.0, WH, True, _head)]
+        for _txt, _dx in _subs:
+            BODY[8].append(L(_col + 64 + _dx, _y + 43, 21.1, REF, False, _txt))
+
 FOOTERS = {
     2: "Four outputs from one request \u2022 Crown-scale aerial imagery + regional satellite monitoring \u2022 Live system, first results on 6 sites",
     3: "Mg/ha \u00d7 ha = Mg \u2022 CF starts at 0.47; refine by forest type [10] \u2022 Crown / biomass / change methods: [2\u20138]",
     4: "Measured on 6 sites, 2024\u20132026 \u2022 60 automated tests \u2022 Rond\u00f4nia, Brazil",
     6: "Prescribed stack, with task queues and COG tile serving added for practical inference [1,7,8]",
     7: "Stock change is not credited sequestration [10] \u2022 Field verification remains essential",
+    5: "Planned architecture • Separate crown and regional scales • "
+       "Biome labels: RESOLVE [9] • Every output retains date and model version",
+    8: "Primary references • Accessed 20 September 2026 • Synthetic 3D "
+       "illustrations • First results measured on 6 sites",
 }
 
 
-def emit(slide, d):
-    mid = d["y"] + d["size"] * 0.62
-    h = d["size"] * 2.0
-    box = slide.shapes.add_textbox(
-        Inches(d["x"] * K - 0.06), Inches((mid - h / 2) * K),
-        Inches(min(DECK_W - d["x"], 1400) * K), Inches(h * K))
-    tf = box.text_frame
-    tf.word_wrap = False
-    tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
-    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
-    p = tf.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
-    r = p.add_run()
-    r.text = d["text"]
-    r.font.name = FONT
-    r.font.size = Pt(round(d["size"] * FS, 1))
-    r.font.bold = d["bold"]
-    r.font.color.rgb = RGBColor.from_string(d["colour"].upper())
-
-
-doc = fitz.open(SRC)
-prs = Presentation()
-prs.slide_width, prs.slide_height = Inches(SLIDE_W), Inches(SLIDE_H)
-blank = prs.slide_layouts[6]
-laid = kept = 0
-
-
-def frame(slide, name, x, y, w, h):
-    """An inset diagram with a hairline, so it reads as a screen not a hole."""
-    path = os.path.join(DIAGRAMS, f"{name}.png")
-    if not os.path.exists(path):
-        return
-    pic = slide.shapes.add_picture(
-        path, Inches(x * K), Inches(y * K), Inches(w * K), Inches(h * K))
-    pic.line.fill.solid()
-    pic.line.fill.fore_color.rgb = RGBColor.from_string("B6FAFF")
-    pic.line.width = Pt(0.75)
-
-
-for index, item in enumerate(ORDER, 1):
-    slide = prs.slides.add_slide(blank)
-
-    # ---------------------------------------------- an inserted slide ----
-
-    # ------------------------------------------- a page of the original ----
-    pno = item
-    page = doc[pno - 1]
-    bare = os.path.join(PLATES, f"bare{pno}.png")
-    plate = bare if (pno in DIAGRAM_AT and os.path.exists(bare)) else os.path.join(
-        PLATES, f"plate{pno}.png")
-    slide.shapes.add_picture(plate, 0, 0, Inches(SLIDE_W), Inches(SLIDE_H))
-
-    for (name, x, y, w, h) in DIAGRAM_AT.get(pno, []):
-        frame(slide, name, x, y, w, h)
-
-    for blk in page.get_text("dict")["blocks"]:
-        if blk.get("type") != 0:
-            continue
-        for line in blk["lines"]:
-            for s in line["spans"]:
-                t = s["text"]
-                x0, y0, x1, y1 = s["bbox"]
-                is_footer = y0 > 750
-                is_page_no = x0 > 1300 and y0 > 750
-                # keep the slide title, the footer strip and the page number;
-                # every other original span is replaced by the new layout
-                if pno in BODY and not (t in KEEP.get(pno, []) or is_footer):
-                    continue
-                if is_page_no:
-                    t = f"{index:02d}"          # two inserts shift everything
-                elif is_footer and pno in FOOTERS:
-                    t = FOOTERS[pno]
-                t = SPAN_EDITS.get((pno, t), t)
-                emit(slide, dict(x=x0, y=y0, size=s["size"],
-                                 colour=f"{s['color']:06x}",
-                                 bold="Bold" in s["font"] or "Medium" in s["font"],
-                                 text=t))
-                kept += 1
-
-    for d in BODY.get(pno, []):
-        emit(slide, d)
-        laid += 1
-
-prs.save(OUT)
-print(f"kept {kept} original spans (titles/footers), laid out {laid} new body lines")
-print("wrote", OUT)
-
-
-# ------------------------------------------------------- visual check ------
-# PowerPoint is not available here, so draw the same layout with the same
-# font to see what the slide will actually look like.
-from PIL import Image, ImageDraw, ImageFont  # noqa: E402
-
-os.makedirs(PREVIEW, exist_ok=True)
-S = 2
-_F = {}
-
-
-def face(sz, bold):
-    key = (round(sz, 1), bold)
-    if key not in _F:
-        path = r"C:\Windows\Fonts\segoeuib.ttf" if bold else r"C:\Windows\Fonts\segoeui.ttf"
-        _F[key] = ImageFont.truetype(path, max(6, int(round(sz * S))))
-    return _F[key]
-
-
-pages = []
-
-
-def paste(im, name, x, y, w, h):
-    path = os.path.join(DIAGRAMS, f"{name}.png")
-    if not os.path.exists(path):
-        return
-    d_im = Image.open(path).convert("RGB").resize(
-        (int(w * S), int(h * S)), Image.LANCZOS)
-    im.paste(d_im, (int(x * S), int(y * S)))
-    ImageDraw.Draw(im).rectangle(
-        [int(x * S), int(y * S), int((x + w) * S), int((y + h) * S)],
-        outline="#b6faff", width=2)
-
-
-for index, item in enumerate(ORDER, 1):
-
-    pno = item
-    page = doc[pno - 1]
-    bare = os.path.join(PLATES, f"bare{pno}.png")
-    use = bare if (pno in DIAGRAM_AT and os.path.exists(bare)) else os.path.join(
-        PLATES, f"plate{pno}.png")
-    im = Image.open(use).convert("RGB")
-    for (name, x, y, w, h) in DIAGRAM_AT.get(pno, []):
-        paste(im, name, x, y, w, h)
-    dr = ImageDraw.Draw(im)
-
-    def put(d):
-        f = face(d["size"], d["bold"])
-        dr.text((d["x"] * S, (d["y"] + d["size"] * 0.62) * S),
-                d["text"], font=f, fill=f"#{d['colour']}", anchor="lm")
-
-    for blk in page.get_text("dict")["blocks"]:
-        if blk.get("type") != 0:
-            continue
-        for line in blk["lines"]:
-            for sp in line["spans"]:
-                t = sp["text"]
-                x0, y0, x1, y1 = sp["bbox"]
-                is_footer = y0 > 750
-                is_page_no = x0 > 1300 and y0 > 750
-                if pno in BODY and not (t in KEEP.get(pno, []) or is_footer):
-                    continue
-                if is_page_no:
-                    t = f"{index:02d}"
-                elif is_footer and pno in FOOTERS:
-                    t = FOOTERS[pno]
-                t = SPAN_EDITS.get((pno, t), t)
-                put(dict(x=x0, y=y0, size=sp["size"], colour=f"{sp['color']:06x}",
-                         bold="Bold" in sp["font"] or "Medium" in sp["font"], text=t))
-
-    for d in BODY.get(pno, []):
-        put(d)
-
-    for d in BODY.get(pno, []):
-        w = dr.textlength(d["text"], font=face(d["size"], d["bold"])) / S
-        if d["x"] + w > HERO_X[pno]:
-            print(f"  !! p{pno} overruns hero by {d['x']+w-HERO_X[pno]:.0f}pt: {d['text'][:44]}")
-
-    im.save(os.path.join(PREVIEW, f"p{index:02d}.png"), quality=92)
-    pages.append(im)
-
-pdf = r"D:\Sathyabama ORION Build\Order_of_One_ORION1.0_v2.pdf"
-pages[0].save(pdf, save_all=True, append_images=pages[1:], resolution=150)
-print("preview ->", PREVIEW)
-print("wrote", pdf)
