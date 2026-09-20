@@ -115,7 +115,13 @@ scale = out[0].rect.width / 1440.0
 linked = 0
 for pno in range(1, 9):
     page = out[pno - 1]
-    for d in BODY.get(pno, []):
+    # the footer is drawn from FOOTERS, not BODY, so it needs including here
+    # or the demo link is the one reference on the page that does not work
+    candidates = list(BODY.get(pno, []))
+    if pno in FOOTERS:
+        candidates.append(dict(x=76, y=763.7, size=18.0, bold=False,
+                               text=FOOTERS[pno]))
+    for d in candidates:
         url = LINKS.get(d["text"])
         if not url:
             continue

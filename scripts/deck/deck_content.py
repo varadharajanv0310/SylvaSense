@@ -204,7 +204,7 @@ for _col, _entries in (
             BODY[8].append(L(_col + 64 + _dx, _y + 43, 21.1, REF, False, _txt))
 
 FOOTERS = {
-    2: "Four outputs from one request • Live system, first results on 6 sites • Live demo: [ PASTE YOUR URL ]",
+    2: "Four outputs from one request • Live system, first results on 6 sites • sylvasense-orion.vercel.app",
     3: "Mg/ha \u00d7 ha = Mg \u2022 CF starts at 0.47; refine by forest type [10] \u2022 Crown / biomass / change methods: [2\u20138]",
     4: "Measured on 6 sites, 2024\u20132026 \u2022 60 automated tests \u2022 Rond\u00f4nia, Brazil",
     6: "Prescribed stack, with task queues and COG tile serving added for practical inference [1,7,8]",
@@ -214,6 +214,9 @@ FOOTERS = {
     8: "Primary references • Accessed 20 September 2026 • Synthetic 3D "
        "illustrations • First results measured on 6 sites",
 }
+#: the deployed demo, live and public
+DEMO_URL = "https://sylvasense-orion.vercel.app"
+
 
 # ---------------------------------------------------------------- links ----
 # Every one of these was checked with a request before being put in the deck.
@@ -240,10 +243,9 @@ LINKS = {
     "TiTiler": "https://developmentseed.org/titiler/",
     "RESOLVE ecoregions · Dinerstein et al., 2017":
         "https://doi.org/10.1093/biosci/bix014",
+    "Four outputs from one request • Live system, first results on 6 sites • sylvasense-orion.vercel.app": DEMO_URL,
     "IPCC 2006 · Forest Land · Table 4.3":
         "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/4_Volume4/"
         "V4_04_Ch4_Forest_Land.pdf",
 }
 
-#: set this once the site is deployed; it becomes slide 2's footer link
-DEMO_URL = ""
