@@ -20,6 +20,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.oxml import parse_xml
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
@@ -46,6 +47,28 @@ TITLE_FIELDS = [
     "Team ID: ",
     "Team Name: Order of One",
 ]
+
+
+#: PowerPoint overrides a hyperlink run's own colour with the theme's link
+#: blue, which on this background reads as a browser default rather than as
+#: part of the deck. This extension - Office's "use text colour for
+#: hyperlink" - tells it to honour the srgbClr already on the run.
+_HLINK_CLR = (
+    '<a:extLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+    '<a:ext uri="{A12FA001-AC4F-418D-AE19-62706E023703}">'
+    '<ahyp:hlinkClr xmlns:ahyp="http://schemas.microsoft.com/office/drawing/'
+    '2018/hyperlinkcolor" val="tx"/></a:ext></a:extLst>')
+
+
+def _keep_colour(run):
+    """Stop PowerPoint repainting a link run in theme blue."""
+    from pptx.oxml.ns import qn
+    hlink = run._r.find(qn("a:rPr") + "/" + qn("a:hlinkClick"))
+    if hlink is None:
+        rPr = run._r.find(qn("a:rPr"))
+        hlink = None if rPr is None else rPr.find(qn("a:hlinkClick"))
+    if hlink is not None:
+        hlink.append(parse_xml(_HLINK_CLR))
 
 
 def emit(slide, d):
@@ -75,6 +98,7 @@ def emit(slide, d):
     url = LINKS.get(d["text"])
     if url:
         r.hyperlink.address = url
+        _keep_colour(r)
 
 
 def frame(slide, name, x, y, w, h):
