@@ -51,6 +51,10 @@ def emit(slide, d):
     box = slide.shapes.add_textbox(
         Inches(d["x"] * K - 0.06), Inches((mid - h / 2) * K),
         Inches(min(1440 - d["x"], 1400) * K), Inches(h * K))
+    # python-pptx numbers new boxes from the slide's existing shapes, which on
+    # slide 8 produced a second "TextBox 7" alongside the template's. Distinct
+    # names keep PowerPoint's selection pane usable.
+    box.name = f"sylva-text-{len(slide.shapes)}"
     tf = box.text_frame
     tf.word_wrap = False
     tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
@@ -73,6 +77,7 @@ def frame(slide, name, x, y, w, h):
         return
     pic = slide.shapes.add_picture(
         path, Inches(x * K), Inches(y * K), Inches(w * K), Inches(h * K))
+    pic.name = f"sylva-diagram-{name}"
     pic.line.fill.solid()
     pic.line.fill.fore_color.rgb = RGBColor.from_string("B6FAFF")
     pic.line.width = Pt(0.75)
