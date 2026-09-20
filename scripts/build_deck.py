@@ -46,13 +46,16 @@ HERO_X = {1: 1440, 2: 610, 3: 750, 4: 800, 5: 1440, 6: 715, 7: 575, 8: 1440}
 # a magenta deck, so each is inset with a hairline rather than bled to the
 # edge - framed it reads as a screen, unframed it reads as a hole punched in
 # the gradient. (x, y, w, h) in deck points, aspect preserved by construction.
+# Three slides carry two insets stacked rather than one large: the extra
+# diagrams had to go somewhere, and shrinking two to share a well beats
+# adding slides the eight-section template has no room for.
 DIAGRAM_AT = {
-    2: (628, 212, 792, 446),
-    3: (752, 246, 652, 367),
-    4: (812, 292, 592, 333),
-    6: (726, 196, 676, 451),
-    5: (232, 198, 976, 549),
-    7: (592, 214, 784, 523),
+    2: [("slide2", 794, 195, 460, 258), ("provenance", 794, 468, 460, 258)],
+    3: [("slide3", 752, 246, 652, 367)],
+    4: [("slide4", 881, 190, 470, 264), ("coverage", 881, 470, 470, 264)],
+    5: [("slide5", 232, 198, 976, 549)],
+    6: [("stack6", 838, 195, 470, 264), ("convergence", 838, 474, 470, 264)],
+    7: [("slide7", 592, 214, 784, 523)],
 }
 
 
@@ -191,58 +194,9 @@ for i, (eye, claim, ev) in enumerate([
 BODY[5] = [L(78, 150, 36.0, WH, True, "One polygon. Three coordinated paths.")]
 
 # ---------------------------------------------------------- inserts ----
-# Two slides the eight-section template has no slot for. The independence
-# argument and the calibration gate are the two most defensible things the
-# project has, and neither had anywhere to live: every existing slide's
-# image well is already spoken for.
-#
-# ORDER is what the deck iterates. An int is a page of the source PDF, a
-# string is one of these.
-ORDER = [1, 2, 3, "convergence", 4, "confidence", 5, 6, 7, 8]
-
-INSERTS = {
-    "convergence": {
-        "title": ("Convergence", 540.0),
-        "body": [
-            L(78, 150, 36.0, WH, True, "No single sensor is decisive."),
-            L(78, 196, 23.0, FT, False,
-              "C-band and L-band radar, optical, lidar and three land-cover "
-              "products."),
-            L(78, 224, 23.0, FT, False,
-              "Their errors are uncorrelated, which is what makes agreement "
-              "mean anything."),
-        ],
-        "images": [("convergence", 78, 262, 1284, 470)],
-        "footer": "Independent sensors, independent producers • three land-cover "
-                  "layers all derived from Sentinel-2 would agree and tell you nothing",
-    },
-    "confidence": {
-        "title": ("Confidence", 556.0),
-        "body": [
-            L(78, 150, 36.0, WH, True, "Every number carries its source."),
-            L(78, 196, 23.0, FT, False,
-              "And the interval on it is measured on ground the model never "
-              "saw — including where it fails."),
-        ],
-        "images": [
-            ("provenance", 78, 262, 630, 354),
-            ("coverage", 752, 262, 610, 343),
-        ],
-        "captions": [
-            L(78, 640, 24.0, CY, True, "One value, everything needed to audit it"),
-            L(78, 674, 21.0, FT, False,
-              "Sensor, window, method, interval and the count of independent"),
-            L(78, 700, 21.0, FT, False, "sources travel with the number itself."),
-            L(752, 640, 24.0, CY, True, "Five of six sites pass"),
-            L(752, 674, 21.0, FT, False,
-              "The wet-season interfluve reaches 0.74 against a nominal 0.90,"),
-            L(752, 700, 21.0, FT, False, "and the product says so rather than hiding it."),
-        ],
-        "footer": "Provenance envelope • split-conformal coverage on held-out "
-                  "spatial blocks • one of six sites does not pass, and is shown "
-                  "not passing",
-    },
-}
+# The deck is the template's eight slides. ORDER exists only so the page
+# numbers stay derived from position rather than hard-coded.
+ORDER = [1, 2, 3, 4, 5, 6, 7, 8]
 
 # slide 8 keeps its reference list
 SPAN_EDITS = {
@@ -303,22 +257,6 @@ for index, item in enumerate(ORDER, 1):
     slide = prs.slides.add_slide(blank)
 
     # ---------------------------------------------- an inserted slide ----
-    if isinstance(item, str):
-        spec = INSERTS[item]
-        slide.shapes.add_picture(os.path.join(PLATES, "bare5.png"), 0, 0,
-                                 Inches(SLIDE_W), Inches(SLIDE_H))
-        text, tx = spec["title"]
-        emit(slide, dict(x=tx, y=55.2, size=70.0, colour=WH, bold=False, text=text))
-        for d in spec["body"] + spec.get("captions", []):
-            emit(slide, d)
-            laid += 1
-        for (name, x, y, w, h) in spec["images"]:
-            frame(slide, name, x, y, w, h)
-        emit(slide, dict(x=76, y=763.7, size=18.0, colour=FT, bold=False,
-                         text=spec["footer"]))
-        emit(slide, dict(x=1369.5, y=763.7, size=18.0, colour=FT, bold=False,
-                         text=f"{index:02d}"))
-        continue
 
     # ------------------------------------------- a page of the original ----
     pno = item
@@ -328,8 +266,8 @@ for index, item in enumerate(ORDER, 1):
         PLATES, f"plate{pno}.png")
     slide.shapes.add_picture(plate, 0, 0, Inches(SLIDE_W), Inches(SLIDE_H))
 
-    if pno in DIAGRAM_AT:
-        frame(slide, f"slide{pno}", *DIAGRAM_AT[pno])
+    for (name, x, y, w, h) in DIAGRAM_AT.get(pno, []):
+        frame(slide, name, x, y, w, h)
 
     for blk in page.get_text("dict")["blocks"]:
         if blk.get("type") != 0:
@@ -398,28 +336,6 @@ def paste(im, name, x, y, w, h):
 
 
 for index, item in enumerate(ORDER, 1):
-    if isinstance(item, str):
-        spec = INSERTS[item]
-        im = Image.open(os.path.join(PLATES, "bare5.png")).convert("RGB")
-        for (name, x, y, w, h) in spec["images"]:
-            paste(im, name, x, y, w, h)
-        dr = ImageDraw.Draw(im)
-
-        def put(d):
-            f = face(d["size"], d["bold"])
-            dr.text((d["x"] * S, (d["y"] + d["size"] * 0.62) * S),
-                    d["text"], font=f, fill=f"#{d['colour']}", anchor="lm")
-
-        text, tx = spec["title"]
-        put(dict(x=tx, y=55.2, size=70.0, colour=WH, bold=False, text=text))
-        for d in spec["body"] + spec.get("captions", []):
-            put(d)
-        put(dict(x=76, y=763.7, size=18.0, colour=FT, bold=False, text=spec["footer"]))
-        put(dict(x=1369.5, y=763.7, size=18.0, colour=FT, bold=False,
-                 text=f"{index:02d}"))
-        im.save(os.path.join(PREVIEW, f"p{index:02d}.png"), quality=92)
-        pages.append(im)
-        continue
 
     pno = item
     page = doc[pno - 1]
@@ -427,8 +343,8 @@ for index, item in enumerate(ORDER, 1):
     use = bare if (pno in DIAGRAM_AT and os.path.exists(bare)) else os.path.join(
         PLATES, f"plate{pno}.png")
     im = Image.open(use).convert("RGB")
-    if pno in DIAGRAM_AT:
-        paste(im, f"slide{pno}", *DIAGRAM_AT[pno])
+    for (name, x, y, w, h) in DIAGRAM_AT.get(pno, []):
+        paste(im, name, x, y, w, h)
     dr = ImageDraw.Draw(im)
 
     def put(d):
