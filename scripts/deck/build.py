@@ -96,10 +96,9 @@ for para, value in zip(title_box.text_frame.paragraphs, TITLE_FIELDS):
         extra.text = ""          # the template splits one line across two runs
 print(f"slide 1: {len(TITLE_FIELDS)} fields filled")
 
-# the demo link is new, so it is added rather than filled
-emit(prs.slides[0], dict(x=256.8, y=714.0, size=34.0, colour=CY, bold=False,
-                         text="Live demo:  [ PASTE YOUR URL ]"))
-added += 1
+# Nothing else goes on slide 1. The organisers prescribe exactly these four
+# fields and asked that nothing be added; the demo link lives in slide 2's
+# footer instead.
 
 # --- slides 2-8: body, diagrams, footer, page number ---------------------
 for pno in range(2, 9):

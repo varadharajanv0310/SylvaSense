@@ -204,7 +204,7 @@ for _col, _entries in (
             BODY[8].append(L(_col + 64 + _dx, _y + 43, 21.1, REF, False, _txt))
 
 FOOTERS = {
-    2: "Four outputs from one request \u2022 Crown-scale aerial imagery + regional satellite monitoring \u2022 Live system, first results on 6 sites",
+    2: "Four outputs from one request • Live system, first results on 6 sites • Live demo: [ PASTE YOUR URL ]",
     3: "Mg/ha \u00d7 ha = Mg \u2022 CF starts at 0.47; refine by forest type [10] \u2022 Crown / biomass / change methods: [2\u20138]",
     4: "Measured on 6 sites, 2024\u20132026 \u2022 60 automated tests \u2022 Rond\u00f4nia, Brazil",
     6: "Prescribed stack, with task queues and COG tile serving added for practical inference [1,7,8]",
