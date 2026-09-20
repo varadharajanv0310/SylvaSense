@@ -87,16 +87,15 @@ for pno in range(1, 9):
         ]):
             put(dict(x=256.8, y=435.1 + i * 67.5, size=48.5, colour="ffffff",
                      bold=False, text=t))
-        put(dict(x=256.8, y=714.0, size=34.0, colour="b6faff", bold=False,
-                 text="Live demo:  [ PASTE YOUR URL ]"))
 
     for d in BODY.get(pno, []):
         put(d)
     if pno in FOOTERS:
         put(dict(x=76, y=763.7, size=18.0, colour=FT, bold=False,
                  text=FOOTERS[pno]))
-    put(dict(x=1369.5, y=763.7, size=18.0, colour=FT, bold=False,
-             text=f"{pno:02d}"))
+    if pno > 1:
+        put(dict(x=1369.5, y=763.7, size=18.0, colour=FT, bold=False,
+                 text=f"{pno:02d}"))
 
     im.save(os.path.join(OUT, f"p{pno:02d}.png"), quality=92)
     pages.append(im)
