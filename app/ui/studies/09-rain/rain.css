@@ -1,0 +1,150 @@
+.rn-root {
+  background: #0d211d;
+  color: #e6f4f0;
+}
+
+.rn-h1 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.8vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: #f2fbf8;
+  text-shadow: 0 2px 44px rgba(0, 20, 18, 0.8);
+}
+.rn-h2 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.4rem, 2.9vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+  margin: 0;
+  color: #f2fbf8;
+  text-shadow: 0 2px 28px rgba(0, 20, 18, 0.8);
+}
+.rn-cyan { color: #8fe8de; }
+.rn-green { color: #7af0b4; }
+.rn-dry { color: #e0a765; }
+.rn-warn { color: #e0a765; }
+.rn-dim { color: rgba(226, 244, 240, 0.44); }
+
+.rn-lede {
+  font-size: clamp(0.92rem, 1.14vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(226, 244, 240, 0.62);
+  max-width: 52ch;
+  margin: 24px auto 0;
+  text-shadow: 0 1px 22px rgba(0, 20, 18, 0.85);
+}
+.rn-body {
+  font-size: clamp(0.88rem, 1.05vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(226, 244, 240, 0.58);
+  max-width: 42ch;
+  margin: 20px 0 0;
+  text-shadow: 0 1px 20px rgba(0, 20, 18, 0.85);
+}
+.rn-eyebrow { color: rgba(226, 244, 240, 0.46); margin-bottom: 22px; }
+.rn-tag { color: #8fe8de; margin-bottom: 14px; }
+
+.rn-centre {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 88vw);
+  text-align: center;
+  z-index: 5;
+}
+.rn-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(440px, 44vw);
+  z-index: 5;
+}
+.rn-alarm {
+  right: clamp(26px, 6vw, 92px);
+  /* clear of the centred headline it runs alongside */
+  top: 74%;
+  transform: translateY(-50%);
+  width: min(360px, 38vw);
+  text-align: right;
+  z-index: 5;
+}
+.rn-huge {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 4px 0 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* altitude readout — this concept's instrument */
+.rn-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(330px, 66vw);
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.rn-alt {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #d8f6f0;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 30px rgba(0, 20, 18, 0.85);
+}
+.rn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(226, 244, 240, 0.14);
+}
+.rn-row .micro { color: rgba(226, 244, 240, 0.42); }
+.rn-row-v { font-size: 0.8rem; font-weight: 300; color: #e6f4f0; font-variant-numeric: tabular-nums; }
+
+.rn-metrics {
+  left: 50%;
+  bottom: clamp(48px, 8vh, 96px);
+  transform: translateX(-50%);
+  width: min(1140px, 90vw);
+  z-index: 6;
+}
+.rn-metrics > .beat {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(143, 232, 222, 0.18);
+  border-top: 1px solid rgba(143, 232, 222, 0.18);
+  border-bottom: 1px solid rgba(143, 232, 222, 0.18);
+}
+.rn-m { background: rgba(8, 20, 19, 0.92); padding: 13px 14px 12px; }
+.rn-m-k { color: rgba(226, 244, 240, 0.46); }
+.rn-m-v { font-size: 0.98rem; font-weight: 300; color: #f2fbf8; margin: 6px 0 5px; }
+.rn-m-n { color: rgba(226, 244, 240, 0.32); letter-spacing: 0.1em; }
+
+@media (max-width: 900px) {
+  .rn-left, .rn-alarm, .rn-readout {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    transform: none;
+    text-align: left;
+  }
+  .rn-alarm { top: auto; bottom: 26vh; }
+  .rn-readout { bottom: 26px; }
+  .rn-metrics { width: 94vw; }
+  .rn-metrics > .beat { grid-template-columns: repeat(2, 1fr); }
+}

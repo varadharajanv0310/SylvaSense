@@ -1,0 +1,3924 @@
+{
+ "generated": "2026-09-20",
+ "note": "Captured from the SylvaSense API against live Planetary Computer and NASA Earthdata reads. Served when the API is unreachable.",
+ "sites": [
+  {
+   "fixture": {
+    "id": "clearcut",
+    "name": "Machadinho d'Oeste fishbone",
+    "state": "candidate",
+    "purpose": "alert latency and detection on unambiguous stand-replacing loss",
+    "hypothesis": "Recent clear-cut with a datable transition. Both SAR and optical should find it; this fixture measures how many days each takes.",
+    "bbox": [
+     -62.05,
+     -9.44,
+     -61.99,
+     -9.38
+    ],
+    "centroid": [
+     -62.02,
+     -9.41
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "clearcut",
+     "bbox": [
+      -62.05,
+      -9.44,
+      -61.989999999999995,
+      -9.379999999999999
+     ],
+     "centroid": [
+      -62.01999999999998,
+      -9.41
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 1.0,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 122.5,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 117.5,
+       "high": 127.6,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 6637 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 59779,
+       "footprints_passing_qa": 6637,
+       "region_bbox": [
+        -62.37,
+        -9.76,
+        -61.67,
+        -9.06
+       ],
+       "median_agbd": 75.0,
+       "footprint_sd": 133.7,
+       "single_footprint_pi_width": 4742.5,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 6637,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 57.6,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 6637 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 131,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-16"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 131
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -8.142,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-16"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -10.773,
+       "high": -5.511,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -13.845,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-16"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -16.458,
+       "high": -11.232,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -5.703,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-16"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 286,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.5993,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.3394,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.1806,
+       "high": 0.4981,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 0.3711,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "grassland",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "grassland": 0.4997,
+        "tree cover": 0.3711,
+        "built-up": 0.0784,
+        "bare / sparse": 0.028,
+        "cropland": 0.0148
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 0.3161,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "non-forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 0.3265,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 126.6,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 4.57,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.0039,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-15",
+       "to": "2026-09-16"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 130 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-08-20",
+      "observations_to_confirm": 23.698598619535662,
+      "nonforest_mu_db": -20.27
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0393,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-15",
+       "to": "2026-09-16"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0143,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-13",
+       "to": "2026-09-18"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 111 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-10-13",
+      "observations_to_confirm": 4.86712158808933,
+      "nonforest_mu_db": 0.64
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0586,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-13",
+       "to": "2026-09-18"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.0164,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2025-08-20"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2025-08-20",
+      "cross_sensor_agreement": 0.1134
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "clearcut",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 79.3,
+     "agbd_low": 71.7,
+     "agbd_high": 87.0,
+     "carbon_mean": 37.3,
+     "cells": 4489,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 131.0,
+     "agbd_low": 130.3,
+     "agbd_high": 131.8,
+     "carbon_mean": 61.6,
+     "cells": 608400,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 3822,
+     "n_calibration": 3822,
+     "n_test": 813,
+     "gedi_footprints": 6631,
+     "grid_cells_with_footprints": 4635,
+     "footprints_per_cell": 1.43,
+     "rmse_mg_ha": 96.0,
+     "bias_mg_ha": 0.6,
+     "r2": 0.472,
+     "gedi_mean_mg_ha": 122.9,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.8979,
+      "n": 813,
+      "mean_width": 242.8423,
+      "passes": true
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "swir": 0.4,
+      "ndvi": 0.165,
+      "vh_std": 0.162,
+      "slope": 0.109,
+      "vh_db": 0.061,
+      "elevation": 0.055
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+     "ranks_cells": true,
+     "caveats": [
+      "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur"
+     ]
+    },
+    "usable": true
+   }
+  },
+  {
+   "fixture": {
+    "id": "intact",
+    "name": "Parque Nacional de Pacaas Novos interior",
+    "state": "confirmed",
+    "purpose": "false-positive floor",
+    "hypothesis": "Closed primary forest. Any alert raised here is a false positive and bounds our specificity.",
+    "bbox": [
+     -63.95,
+     -11.05,
+     -63.89,
+     -10.99
+    ],
+    "centroid": [
+     -63.92,
+     -11.02
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "intact",
+     "bbox": [
+      -63.95,
+      -11.05,
+      -63.89,
+      -10.99
+     ],
+     "centroid": [
+      -63.92000000000001,
+      -11.020000000000001
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 1.0,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 210.2,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 203.6,
+       "high": 216.7,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 4602 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 48091,
+       "footprints_passing_qa": 4602,
+       "region_bbox": [
+        -64.27,
+        -11.37,
+        -63.57,
+        -10.67
+       ],
+       "median_agbd": 205.7,
+       "footprint_sd": 143.6,
+       "single_footprint_pi_width": 2074.0,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 4602,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 98.8,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 4602 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 67,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 67
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -6.997,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -8.94,
+       "high": -5.054,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -13.067,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -14.938,
+       "high": -11.196,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -6.07,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 272,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.533,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.4848,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.3802,
+       "high": 0.5894,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "tree cover",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "tree cover": 1.0,
+        "shrubland": 0.0
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "dense forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 226.6,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 5.01,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.0001,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 67 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-08-08",
+      "observations_to_confirm": 15.034306195596518,
+      "nonforest_mu_db": -18.7
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0353,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-06",
+       "to": "2026-09-18"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 100 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2026-05-31",
+      "observations_to_confirm": 5.077290543851054,
+      "nonforest_mu_db": 1.55
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0741,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-06",
+       "to": "2026-09-18"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.0002,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2025-08-08"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2025-08-08",
+      "cross_sensor_agreement": 0.0
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "intact",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 182.5,
+     "agbd_low": 169.3,
+     "agbd_high": 195.7,
+     "carbon_mean": 85.8,
+     "cells": 4489,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 197.7,
+     "agbd_low": 196.5,
+     "agbd_high": 198.9,
+     "carbon_mean": 92.9,
+     "cells": 609180,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 2548,
+     "n_calibration": 2548,
+     "n_test": 756,
+     "gedi_footprints": 4594,
+     "grid_cells_with_footprints": 3304,
+     "footprints_per_cell": 1.39,
+     "rmse_mg_ha": 107.4,
+     "bias_mg_ha": 0.6,
+     "r2": -0.117,
+     "gedi_mean_mg_ha": 209.1,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.9392,
+      "n": 756,
+      "mean_width": 385.5315,
+      "passes": true
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "ndvi": 0.493,
+      "ndmi": 0.451,
+      "swir": 0.046,
+      "rvi": 0.009,
+      "vv_db": 0.0,
+      "vh_db": 0.0
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+     "ranks_cells": false,
+     "caveats": [
+      "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur",
+      "R2 -0.12 on held-out blocks: the model does not rank cells inside this region, so read the map as a level with an interval rather than as a pattern"
+     ]
+    },
+    "usable": true
+   }
+  },
+  {
+   "fixture": {
+    "id": "intact-deep",
+    "name": "Interior Amazonas, off-road control",
+    "state": "confirmed",
+    "purpose": "second false-positive floor, far from any road",
+    "hypothesis": "Deep interior forest with no access corridor. Two independent intact fixtures give a far better specificity estimate than one, and this one cannot be explained away by proximity to an edge.",
+    "bbox": [
+     -65.4,
+     -5.6,
+     -65.34,
+     -5.54
+    ],
+    "centroid": [
+     -65.37,
+     -5.57
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "intact-deep",
+     "bbox": [
+      -65.4,
+      -5.6,
+      -65.34,
+      -5.54
+     ],
+     "centroid": [
+      -65.37,
+      -5.569999999999999
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 1.0,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 162.4,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 139.9,
+       "high": 184.9,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 177 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 63691,
+       "footprints_passing_qa": 177,
+       "region_bbox": [
+        -65.72,
+        -5.92,
+        -65.02,
+        -5.22
+       ],
+       "median_agbd": 158.1,
+       "footprint_sd": 96.7,
+       "single_footprint_pi_width": 1518.2,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 177,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 76.3,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 177 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 188,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-29",
+        "to": "2026-09-19"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 160,
+        "ascending": 28
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -6.831,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-29",
+        "to": "2026-09-19"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -8.586,
+       "high": -5.077,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -12.706,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-29",
+        "to": "2026-09-19"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -14.377,
+       "high": -11.035,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -5.875,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-29",
+        "to": "2026-09-19"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 227,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-19"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.467,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-19"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.4928,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-19"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.4254,
+       "high": 0.5601,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "tree cover",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "tree cover": 1.0
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "dense forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 1.0,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 91.8,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 3.61,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.0002,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-10-18",
+       "to": "2026-09-19"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 108 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2026-01-27",
+      "observations_to_confirm": 17.78353334346043,
+      "nonforest_mu_db": -18.11
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0588,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-10-18",
+       "to": "2026-09-19"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-11-08",
+       "to": "2026-09-19"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 72 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2026-04-17",
+      "observations_to_confirm": 1.5899916286857037,
+      "nonforest_mu_db": 1.84
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0963,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-11-08",
+       "to": "2026-09-19"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.0003,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2026-01-27"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2026-01-27",
+      "cross_sensor_agreement": 0.0
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "intact-deep",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 238.4,
+     "agbd_low": 228.8,
+     "agbd_high": 247.9,
+     "carbon_mean": 112.0,
+     "cells": 4489,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 223.8,
+     "agbd_low": 222.9,
+     "agbd_high": 224.6,
+     "carbon_mean": 105.2,
+     "cells": 609180,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 121,
+     "n_calibration": 121,
+     "n_test": 24,
+     "gedi_footprints": 177,
+     "grid_cells_with_footprints": 145,
+     "footprints_per_cell": 1.22,
+     "rmse_mg_ha": 61.4,
+     "bias_mg_ha": -6.5,
+     "r2": -0.601,
+     "gedi_mean_mg_ha": 160.5,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.9583,
+      "n": 24,
+      "mean_width": 227.5283,
+      "passes": true
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "vh_db": 0.366,
+      "slope": 0.267,
+      "swir": 0.187,
+      "vh_std": 0.097,
+      "rvi": 0.066,
+      "nir": 0.017
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+     "ranks_cells": false,
+     "caveats": [
+      "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur",
+      "R2 -0.60 on held-out blocks: the model does not rank cells inside this region, so read the map as a level with an interval rather than as a pattern"
+     ]
+    },
+    "usable": true
+   }
+  },
+  {
+   "fixture": {
+    "id": "cloudy",
+    "name": "Wet-season interfluve, upper Ji-Parana",
+    "state": "candidate",
+    "purpose": "SAR-only path",
+    "hypothesis": "Persistent wet-season cloud should push clear-observation fraction below the optical threshold, forcing the SAR-only answer and a degraded-not-broken response.",
+    "bbox": [
+     -62.4,
+     -10.1,
+     -62.34,
+     -10.04
+    ],
+    "centroid": [
+     -62.37,
+     -10.07
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "cloudy",
+     "bbox": [
+      -62.4,
+      -10.1,
+      -62.339999999999996,
+      -10.04
+     ],
+     "centroid": [
+      -62.37,
+      -10.07
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 0.75,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 61.2,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 56.2,
+       "high": 66.3,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 3936 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 59099,
+       "footprints_passing_qa": 3936,
+       "region_bbox": [
+        -62.72,
+        -10.42,
+        -62.02,
+        -9.72
+       ],
+       "median_agbd": 7.3,
+       "footprint_sd": 102.8,
+       "single_footprint_pi_width": 7041.0,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 3936,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 28.8,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 3936 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 67,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 67
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -8.365,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -10.74,
+       "high": -5.99,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -13.948,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -16.201,
+       "high": -11.695,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -5.583,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 146,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.602,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.3898,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.254,
+       "high": 0.5256,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 0.3602,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "grassland",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "grassland": 0.636,
+        "tree cover": 0.3602,
+        "bare / sparse": 0.0031,
+        "shrubland": 0.0002,
+        "cropland": 0.0002
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 0.6512,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "non-forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 0.3453,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 189.0,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 4.4,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "independent layers disagree on tree cover (35%-65%); treat the forest/non-forest call as unresolved",
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.0005,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 67 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-09-19",
+      "observations_to_confirm": 11.336939102564102,
+      "nonforest_mu_db": -19.9
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0221,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0037,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-09-21",
+       "to": "2026-09-18"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 95 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-09-21",
+      "observations_to_confirm": 4.272266244057052,
+      "nonforest_mu_db": 1.02
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0248,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-09-21",
+       "to": "2026-09-18"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.004,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2025-09-19"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2025-09-19",
+      "cross_sensor_agreement": 0.0473
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "cloudy",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 91.3,
+     "agbd_low": 86.0,
+     "agbd_high": 96.7,
+     "carbon_mean": 42.9,
+     "cells": 4422,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 78.2,
+     "agbd_low": 77.7,
+     "agbd_high": 78.6,
+     "carbon_mean": 36.7,
+     "cells": 608400,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 2380,
+     "n_calibration": 2380,
+     "n_test": 393,
+     "gedi_footprints": 3935,
+     "grid_cells_with_footprints": 2773,
+     "footprints_per_cell": 1.42,
+     "rmse_mg_ha": 96.5,
+     "bias_mg_ha": -5.6,
+     "r2": 0.51,
+     "gedi_mean_mg_ha": 62.9,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.7379,
+      "n": 393,
+      "mean_width": 157.0117,
+      "passes": false
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "swir": 0.555,
+      "ndmi": 0.353,
+      "ndvi": 0.04,
+      "elevation": 0.028,
+      "vh_std": 0.016,
+      "vv_db": 0.007
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "stocks here are mostly below C-band saturation, where the SAR predictors carry real information",
+     "ranks_cells": true,
+     "caveats": [
+      "stocks here are mostly below C-band saturation, where the SAR predictors carry real information",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur"
+     ]
+    },
+    "usable": false
+   }
+  },
+  {
+   "fixture": {
+    "id": "degradation",
+    "name": "Selective logging, BR-364 corridor",
+    "state": "candidate",
+    "purpose": "the hard case",
+    "hypothesis": "Sub-canopy extraction with the canopy largely retained. Expected to be our weakest result \u2014 the fixture exists to keep us honest about it rather than to be passed.",
+    "bbox": [
+     -62.62,
+     -9.86,
+     -62.56,
+     -9.8
+    ],
+    "centroid": [
+     -62.59,
+     -9.83
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "degradation",
+     "bbox": [
+      -62.62,
+      -9.86,
+      -62.559999999999995,
+      -9.799999999999999
+     ],
+     "centroid": [
+      -62.589999999999996,
+      -9.83
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 0.75,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 76.9,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 70.4,
+       "high": 83.4,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 3003 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 66373,
+       "footprints_passing_qa": 3003,
+       "region_bbox": [
+        -62.94,
+        -10.18,
+        -62.24,
+        -9.48
+       ],
+       "median_agbd": 7.0,
+       "footprint_sd": 115.4,
+       "single_footprint_pi_width": 6538.0,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 3003,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 36.1,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 3003 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 75,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 75
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -7.723,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -9.921,
+       "high": -5.526,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -13.46,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -15.483,
+       "high": -11.438,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -5.737,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 141,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.6193,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.4129,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.2857,
+       "high": 0.5402,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 0.6182,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "tree cover",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "tree cover": 0.6182,
+        "grassland": 0.3723,
+        "bare / sparse": 0.0066,
+        "built-up": 0.002,
+        "cropland": 0.0007
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 0.7717,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "dense forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 0.5939,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 178.8,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 3.96,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "independent layers disagree on tree cover (59%-77%); treat the forest/non-forest call as unresolved",
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.001,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 67 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-08-08",
+      "observations_to_confirm": 12.387293610911701,
+      "nonforest_mu_db": -19.02
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0244,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-02",
+       "to": "2026-09-09"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0037,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-06",
+       "to": "2026-09-16"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 103 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-10-06",
+      "observations_to_confirm": 8.024108798681228,
+      "nonforest_mu_db": 1.74
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0405,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-10-06",
+       "to": "2026-09-16"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.0043,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2025-08-08"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2025-08-08",
+      "cross_sensor_agreement": 0.0781
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "degradation",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 125.4,
+     "agbd_low": 117.9,
+     "agbd_high": 132.9,
+     "carbon_mean": 59.0,
+     "cells": 4489,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 81.4,
+     "agbd_low": 80.8,
+     "agbd_high": 82.0,
+     "carbon_mean": 38.2,
+     "cells": 608400,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 1778,
+     "n_calibration": 1778,
+     "n_test": 441,
+     "gedi_footprints": 2999,
+     "grid_cells_with_footprints": 2219,
+     "footprints_per_cell": 1.35,
+     "rmse_mg_ha": 75.6,
+     "bias_mg_ha": 4.9,
+     "r2": 0.472,
+     "gedi_mean_mg_ha": 79.3,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.9025,
+      "n": 441,
+      "mean_width": 166.4114,
+      "passes": true
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "swir": 0.75,
+      "vh_std": 0.099,
+      "ndmi": 0.088,
+      "nir": 0.057,
+      "vh_db": 0.006,
+      "vv_db": 0.0
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "stocks here are mostly below C-band saturation, where the SAR predictors carry real information",
+     "ranks_cells": true,
+     "caveats": [
+      "stocks here are mostly below C-band saturation, where the SAR predictors carry real information",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur"
+     ]
+    },
+    "usable": true
+   }
+  },
+  {
+   "fixture": {
+    "id": "burn",
+    "name": "Late dry-season burn scar, Candeias do Jamari",
+    "state": "candidate",
+    "purpose": "confounding signature",
+    "hypothesis": "Fire scar. Optical change is dramatic while SAR backscatter change is muted, so a naive optical-only detector over-calls area here.",
+    "bbox": [
+     -63.28,
+     -9.06,
+     -63.22,
+     -9.0
+    ],
+    "centroid": [
+     -63.25,
+     -9.03
+    ]
+   },
+   "window": {
+    "start": "2024-09-20",
+    "end": "2026-09-20"
+   },
+   "generated": "2026-09-20",
+   "evidence": {
+    "aoi": {
+     "id": "burn",
+     "bbox": [
+      -63.28,
+      -9.06,
+      -63.22,
+      -9.0
+     ],
+     "centroid": [
+      -63.25,
+      -9.030000000000001
+     ],
+     "gedi_covered": true
+    },
+    "window": {
+     "start": "2024-09-20",
+     "end": "2026-09-20"
+    },
+    "definition": {
+     "id": "fao",
+     "label": "FAO Global Forest Resources Assessment",
+     "baseline": null
+    },
+    "confidence": {
+     "score": 0.75,
+     "basis": "7 of 7 sources nominal, 0 degraded, 0 unavailable",
+     "limits": []
+    },
+    "observations": [
+     {
+      "key": "gedi_agbd_mean",
+      "value": 298.9,
+      "unit": "Mg/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": {
+        "from": "2019-04-18",
+        "to": "2026-09-20"
+       },
+       "method": "mean of quality L4A footprints (l4a_quality_flag_rel3 == 1, degrade_flag == 0, sensitivity > 0.95) over 8 granules",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 287.6,
+       "high": 310.2,
+       "level": 0.95,
+       "method": "se_of_mean_with_design_effect"
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 1565 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured"
+      ],
+      "extra": {
+       "footprints_scanned": 38446,
+       "footprints_passing_qa": 1565,
+       "region_bbox": [
+        -63.6,
+        -9.38,
+        -62.9,
+        -8.68
+       ],
+       "median_agbd": 273.9,
+       "footprint_sd": 144.3,
+       "single_footprint_pi_width": 547.9,
+       "design_effect_assumed": 2.5
+      }
+     },
+     {
+      "key": "gedi_shot_count",
+      "value": 1565,
+      "unit": "footprints",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "footprints passing the standard L4A quality filter",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "gedi_carbon_mean",
+      "value": 140.5,
+      "unit": "MgC/ha",
+      "provenance": {
+       "source": "gedi-l4a",
+       "sensor": "GEDI (ISS)",
+       "acquired": null,
+       "method": "AGBD x 0.47 carbon fraction",
+       "version": "0.2.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "GEDI is a sample, not a map: this is the mean of 1565 footprints over a 78 km box, not a value for the requested plot",
+       "footprint biomass is modelled from waveform metrics, not measured",
+       "0.47 is a convention, not a measurement; species-specific fractions range roughly 0.44-0.50",
+       "this is an above-ground stock, not an annual flux, and it excludes roots and soil carbon entirely"
+      ]
+     },
+     {
+      "key": "sar_scene_count",
+      "value": 66,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "STAC item count over AOI bbox",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "orbit_states": {
+        "descending": 66
+       }
+      }
+     },
+     {
+      "key": "sar_vv_mean",
+      "value": -8.129,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VV gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -11.64,
+       "high": -4.617,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_mean",
+      "value": -13.825,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "temporal mean of VH gamma0, 20 m, AOI window",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": -16.813,
+       "high": -10.836,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      }
+     },
+     {
+      "key": "sar_vh_vv_ratio",
+      "value": -5.696,
+      "unit": "dB",
+      "provenance": {
+       "source": "sentinel-1-rtc",
+       "sensor": "Sentinel-1 C-SAR",
+       "acquired": {
+        "from": "2024-09-24",
+        "to": "2026-09-09"
+       },
+       "method": "mean(VH dB) - mean(VV dB); proxy for volume scattering",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "indicative only; not a calibrated forest/non-forest decision"
+      ]
+     },
+     {
+      "key": "optical_scene_count",
+      "value": 287,
+      "unit": "scenes",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "STAC item count, eo:cloud_cover < 90",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "clear_fraction",
+      "value": 0.5624,
+      "unit": "fraction",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "cloud/shadow mask via scl",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected"
+      ]
+     },
+     {
+      "key": "ndvi_mean",
+      "value": 0.4383,
+      "unit": "index",
+      "provenance": {
+       "source": "sentinel-2-l2a",
+       "sensor": "Sentinel-2 MSI",
+       "acquired": {
+        "from": "2024-09-21",
+        "to": "2026-09-18"
+       },
+       "method": "mean NDVI over cloud-masked pixels, 20 m",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "uncertainty": {
+       "low": 0.2721,
+       "high": 0.6045,
+       "level": 0.68,
+       "method": "ensemble_spread"
+      },
+      "caveats": [
+       "scene-classification mask; thin cirrus is under-detected",
+       "greenness saturates in closed canopy; not a biomass measure"
+      ]
+     },
+     {
+      "key": "tree_cover_fraction_2020",
+      "value": 0.7644,
+      "unit": "fraction",
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction of AOI classified 'tree cover' (class 10)",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "WorldCover's tree definition is not the EUDR forest definition"
+      ]
+     },
+     {
+      "key": "landcover_2020",
+      "value": "tree cover",
+      "unit": null,
+      "provenance": {
+       "source": "esa-worldcover",
+       "sensor": "Sentinel-1 + Sentinel-2 (ESA WorldCover)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "modal WorldCover class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "extra": {
+       "composition": {
+        "tree cover": 0.7644,
+        "grassland": 0.1834,
+        "permanent water": 0.0421,
+        "bare / sparse": 0.0095,
+        "shrubland": 0.0005
+       }
+      }
+     },
+     {
+      "key": "alos_forest_fraction",
+      "value": 0.5647,
+      "unit": "fraction",
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": {
+        "from": "2020-01-01",
+        "to": "2020-12-31"
+       },
+       "method": "fraction classified dense or non-dense forest",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "annual mosaic; cannot date a disturbance within the year"
+      ]
+     },
+     {
+      "key": "alos_forest_class",
+      "value": "dense forest",
+      "unit": null,
+      "provenance": {
+       "source": "alos-fnf",
+       "sensor": "ALOS-2 PALSAR-2 (L-band)",
+       "acquired": null,
+       "method": "modal forest/non-forest class over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "iolulc_tree_fraction",
+      "value": 0.6971,
+      "unit": "fraction",
+      "provenance": {
+       "source": "io-lulc",
+       "sensor": "Sentinel-2 (Impact Observatory)",
+       "acquired": {
+        "from": "2023-01-01",
+        "to": "2023-12-31"
+       },
+       "method": "fraction classified 'trees'",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      },
+      "caveats": [
+       "derived from Sentinel-2; not independent of our own optical path"
+      ]
+     },
+     {
+      "key": "elevation_mean",
+      "value": 101.8,
+      "unit": "m",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean elevation over AOI",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     },
+     {
+      "key": "slope_mean",
+      "value": 3.65,
+      "unit": "degrees",
+      "provenance": {
+       "source": "nasadem",
+       "sensor": "SRTM (NASADEM)",
+       "acquired": null,
+       "method": "mean of slope from 30 m elevation gradient",
+       "version": "0.1.0",
+       "fetched_at": null,
+       "stale_days": null
+      }
+     }
+    ],
+    "sources": [
+     {
+      "source": "gedi-l4a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-1-rtc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "sentinel-2-l2a",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "esa-worldcover",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "alos-fnf",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "io-lulc",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     },
+     {
+      "source": "nasadem",
+      "availability": "ok",
+      "code": "",
+      "reason": ""
+     }
+    ],
+    "notes": [
+     "independent layers disagree on tree cover (56%-76%); treat the forest/non-forest call as unresolved",
+     "forest test under 'fao' (>= 10% cover, >= 5 m): met by all 3 independent layers"
+    ],
+    "disclaimer": "Evidence layers, not a compliance determination. Areas reported here are map-derived; bias-adjusted area estimation arrives in a later batch and is required before any figure is used for reporting."
+   },
+   "disturbance": [
+    {
+     "key": "alert_sar_confirmed_fraction",
+     "value": 0.0002,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-08",
+       "to": "2026-09-09"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 66 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-08-20",
+      "observations_to_confirm": 7.141142708061571,
+      "nonforest_mu_db": -21.1
+     }
+    },
+    {
+     "key": "alert_sar_provisional_fraction",
+     "value": 0.0346,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-sar",
+      "sensor": "Sentinel-1 C-SAR",
+      "acquired": {
+       "from": "2025-08-08",
+       "to": "2026-09-09"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_optical_confirmed_fraction",
+     "value": 0.0019,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-09-26",
+       "to": "2026-09-18"
+      },
+      "method": "per-pixel Gaussian forest model from history; Bayesian update per observation; confirm at posterior >= 0.975 over 100 scenes",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "pixel fraction, not an area estimate; map-counted area is biased and must be corrected by the stratified estimator before reporting"
+     ],
+     "extra": {
+      "first_confirmed": "2025-09-26",
+      "observations_to_confirm": 3.756441717791411,
+      "nonforest_mu_db": 0.26
+     }
+    },
+    {
+     "key": "alert_optical_provisional_fraction",
+     "value": 0.0276,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-optical",
+      "sensor": "Sentinel-2 MSI",
+      "acquired": {
+       "from": "2025-09-26",
+       "to": "2026-09-18"
+      },
+      "method": "crossed the posterior threshold but persistence could not be verified within the window",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "caveats": [
+      "not an alert: these are crossings awaiting confirmation, and on stable forest most of them are speckle"
+     ]
+    },
+    {
+     "key": "alert_integrated_confirmed_fraction",
+     "value": 0.0021,
+     "unit": "fraction",
+     "provenance": {
+      "source": "sylvasense-detect-integrated",
+      "sensor": "Sentinel-1 C-SAR + Sentinel-2 MSI",
+      "acquired": {
+       "from": null,
+       "to": "2025-08-20"
+      },
+      "method": "union of confirmed pixels across independent streams; earliest confirmation sets the date",
+      "version": "0.1.0",
+      "fetched_at": null,
+      "stale_days": null
+     },
+     "confidence": 0.9,
+     "caveats": [
+      "pixel fraction, not an area estimate"
+     ],
+     "extra": {
+      "streams_used": [
+       "sar",
+       "optical"
+      ],
+      "earliest_confirmation": "2025-08-20",
+      "cross_sensor_agreement": 0.0131
+     }
+    }
+   ],
+   "biomass": {
+    "fixture": "burn",
+    "available": true,
+    "aoi": {
+     "agbd_mean": 217.6,
+     "agbd_low": 202.0,
+     "agbd_high": 233.3,
+     "carbon_mean": 102.3,
+     "cells": 4422,
+     "level": 0.9
+    },
+    "region": {
+     "agbd_mean": 242.7,
+     "agbd_low": 241.4,
+     "agbd_high": 244.1,
+     "carbon_mean": 114.1,
+     "cells": 608400,
+     "level": 0.9
+    },
+    "fit": {
+     "version": "0.1.0",
+     "n_train": 871,
+     "n_calibration": 871,
+     "n_test": 235,
+     "gedi_footprints": 1562,
+     "grid_cells_with_footprints": 1106,
+     "footprints_per_cell": 1.41,
+     "rmse_mg_ha": 116.9,
+     "bias_mg_ha": -36.2,
+     "r2": -0.329,
+     "gedi_mean_mg_ha": 296.1,
+     "coverage": {
+      "nominal": 0.9,
+      "empirical": 0.9234,
+      "n": 235,
+      "mean_width": 433.8135,
+      "passes": true
+     },
+     "coverage_on_held_out_blocks": true,
+     "grid_resolution_m": 100.0,
+     "feature_importance": {
+      "ndmi": 0.41,
+      "nir": 0.275,
+      "vv_db": 0.21,
+      "slope": 0.047,
+      "vh_db": 0.039,
+      "swir": 0.019
+     },
+     "predictor_sources": {
+      "sentinel-1-rtc": {
+       "scenes": 24
+      },
+      "sentinel-2-l2a": {
+       "scenes": 12
+      },
+      "nasadem": {
+       "scenes": 1
+      }
+     },
+     "saturation": "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+     "ranks_cells": false,
+     "caveats": [
+      "C-band backscatter saturates near 100-150 Mg/ha; above that the model is interpolating between spectral and terrain cues, and the intervals widen accordingly",
+      "the model is fitted over a 78 km box, not over the plot: GEDI does not sample a single hectare densely enough to calibrate anything, so the plot value is this regional model evaluated locally",
+      "GEDI L4A is itself a model over waveform metrics, not a measurement of biomass; its error propagates into everything calibrated to it",
+      "footprints are matched to 100 m cells and GEDI geolocation is about 10 m, so the map inherits that blur",
+      "R2 -0.33 on held-out blocks: the model does not rank cells inside this region, so read the map as a level with an interval rather than as a pattern"
+     ]
+    },
+    "usable": true
+   }
+  }
+ ]
+}

@@ -1,0 +1,280 @@
+/* ------------------------------------------------------------------ *
+ * The console. Inherits everything from record.css — same tokens, same
+ * type, same observation rows — and adds only the controls, because the
+ * output of a run should look identical to a stored record. If the live
+ * answer rendered differently from the cached one, the page would be
+ * telling you they are different kinds of thing. They are not.
+ * ------------------------------------------------------------------ */
+
+.con-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  gap: 60px 74px;
+  align-items: start;
+  padding: 92px 0 68px;
+  border-bottom: 1px solid var(--line);
+}
+.con-top .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #b5c4a2;
+  margin-bottom: 30px;
+}
+.con-top h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 5vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.026em;
+}
+.con-top h1 em {
+  color: var(--leaf);
+}
+.con-top .rec-lede {
+  margin-top: 26px;
+  max-width: 50ch;
+}
+
+/* ---- the form ---- */
+.con-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 30px 28px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+}
+.con-modes {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.con-modes button {
+  flex: 1;
+  padding: 12px 10px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.25s, color 0.25s;
+}
+.con-modes button[aria-pressed="true"] {
+  background: #b9d69817;
+  color: var(--leaf);
+}
+.con-row {
+  display: flex;
+  gap: 14px;
+}
+.con-row > * {
+  flex: 1;
+  min-width: 0;
+}
+.con-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.con-field > span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.con-field input,
+.con-field select {
+  width: 100%;
+  padding: 11px 12px;
+  background: #0d110c;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.con-field select {
+  appearance: none;
+  cursor: pointer;
+}
+.con-field input:focus,
+.con-field select:focus {
+  outline: none;
+  border-color: #b9d69866;
+}
+
+.con-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.con-run {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 18px;
+  background: var(--leaf);
+  border: 0;
+  color: #101810;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.25s;
+}
+.con-run:hover:not(:disabled) {
+  background: #cfe8b0;
+}
+.con-run:disabled {
+  background: #2a3227;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.con-run.is-running {
+  background: none;
+  border: 1px solid var(--amber);
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 13px;
+  justify-content: center;
+}
+.con-cost {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.con-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--amber);
+}
+
+/* ---- progress: three jobs, each landing on its own ---- */
+.con-progress {
+  padding: 40px 0 0;
+}
+.con-progress > .meta {
+  color: var(--muted);
+}
+.con-bars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px 30px;
+  margin-top: 16px;
+}
+.con-bars > div {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.con-bars > div > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a4237;
+  animation: con-pulse 1.4s ease-in-out infinite;
+}
+.con-bars > div[data-done="yes"] {
+  color: var(--ink);
+}
+.con-bars > div[data-done="yes"] > i {
+  background: var(--leaf);
+  animation: none;
+}
+.con-bars > div > b {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+@keyframes con-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.con-out {
+  padding-top: 18px;
+}
+.con .rec-foot {
+  margin-top: 90px;
+}
+
+@media (max-width: 1000px) {
+  .con-top {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 56px 0 44px;
+  }
+  .con-row {
+    flex-direction: column;
+  }
+}
+
+/* ---- upload ---- */
+.con-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.con-drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 26px 18px;
+  border: 1px dashed #b9d69845;
+  background: #0d110c;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+.con-drop:hover {
+  border-color: var(--leaf);
+  background: #b9d69810;
+}
+.con-drop input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.con-drop b {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--leaf);
+}
+.con-drop small {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.con-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px 20px;
+  margin: 0;
+}
+.con-meta dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.con-meta dd {
+  margin: 5px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  word-break: break-word;
+}

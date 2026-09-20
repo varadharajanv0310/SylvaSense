@@ -1,0 +1,169 @@
+.rt-root {
+  background: #0a0906;
+  color: #f0e6d8;
+}
+
+/* warm earth up top, cold mineral depth below — a gradient you fall through */
+.rt-grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 70% at 50% -10%, rgba(120, 72, 28, 0.3) 0%, transparent 55%),
+    radial-gradient(120% 80% at 50% 115%, rgba(10, 20, 30, 0.6) 0%, transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.rt-h1 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.8vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: #f7efe2;
+  text-shadow: 0 2px 44px rgba(0, 0, 0, 0.85);
+}
+.rt-h2 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.4rem, 2.9vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+  margin: 0;
+  color: #f7efe2;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.85);
+}
+.rt-amber { color: #e0a765; }
+.rt-cyan { color: #6fe8d8; }
+.rt-green { color: #7af0b4; }
+.rt-bad { color: #ff7a4d; }
+.rt-dim { color: rgba(240, 230, 216, 0.44); }
+
+.rt-lede {
+  font-size: clamp(0.9rem, 1.1vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(240, 230, 216, 0.6);
+  max-width: 52ch;
+  margin: 24px auto 0;
+  text-shadow: 0 1px 22px rgba(0, 0, 0, 0.9);
+}
+.rt-body {
+  font-size: clamp(0.88rem, 1.05vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(240, 230, 216, 0.58);
+  max-width: 42ch;
+  margin: 20px 0 0;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.9);
+}
+.rt-eyebrow { color: rgba(240, 230, 216, 0.46); margin-bottom: 22px; }
+.rt-tag { color: #e0a765; margin-bottom: 14px; }
+
+.rt-centre {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 88vw);
+  text-align: center;
+  z-index: 5;
+}
+.rt-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(440px, 44vw);
+  z-index: 5;
+}
+.rt-alarm {
+  right: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(360px, 38vw);
+  text-align: right;
+  z-index: 5;
+}
+.rt-huge {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  margin: 4px 0 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* depth readout — the instrument of this concept */
+.rt-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(330px, 66vw);
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.rt-depth {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #f4e3c8;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.85);
+}
+.rt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(240, 230, 216, 0.14);
+}
+.rt-row .micro { color: rgba(240, 230, 216, 0.42); }
+.rt-row-v { font-size: 0.8rem; font-weight: 300; color: #f0e6d8; font-variant-numeric: tabular-nums; }
+
+.rt-metrics {
+  left: 50%;
+  bottom: clamp(48px, 8vh, 96px);
+  transform: translateX(-50%);
+  width: min(1140px, 90vw);
+  z-index: 6;
+}
+.rt-metrics > .beat {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(224, 167, 101, 0.18);
+  border-top: 1px solid rgba(224, 167, 101, 0.18);
+  border-bottom: 1px solid rgba(224, 167, 101, 0.18);
+}
+.rt-m { background: rgba(10, 9, 6, 0.92); padding: 13px 14px 12px; }
+.rt-m-k { color: rgba(240, 230, 216, 0.46); }
+.rt-m-v { font-size: 0.98rem; font-weight: 300; color: #f7efe2; margin: 6px 0 5px; }
+.rt-m-n { color: rgba(240, 230, 216, 0.32); letter-spacing: 0.1em; }
+
+.rt-site {
+  position: fixed;
+  right: 26px;
+  bottom: 54px;
+  z-index: 70;
+  color: rgba(255, 255, 255, 0.26);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .rt-left, .rt-alarm, .rt-readout {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    transform: none;
+    text-align: left;
+  }
+  .rt-alarm { top: auto; bottom: 26vh; }
+  .rt-readout { bottom: 26px; }
+  .rt-metrics { width: 94vw; }
+  .rt-metrics > .beat { grid-template-columns: repeat(2, 1fr); }
+  .rt-site { display: none; }
+}

@@ -1,0 +1,176 @@
+.rings-root {
+  background: #05100a;
+  color: #e6ece5;
+}
+
+.rg-eyebrow {
+  color: rgba(230, 236, 229, 0.5);
+  margin-bottom: 26px;
+}
+
+.rg-h1 {
+  font-size: clamp(2.4rem, 6.2vw, 6.2rem);
+  line-height: 1.02;
+  margin: 0;
+  letter-spacing: -0.015em;
+  color: #f3f7f0;
+}
+.rg-h1 em { font-style: italic; color: #c9e6b9; }
+
+.rg-h2 {
+  font-size: clamp(1.7rem, 3.6vw, 3.4rem);
+  line-height: 1.12;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: #f3f7f0;
+}
+.rg-wide { max-width: 22ch; margin: 0 auto; }
+.rg-cool { color: #d8f1e4; }
+
+.rg-lede {
+  font-size: clamp(0.95rem, 1.25vw, 1.2rem);
+  line-height: 1.62;
+  font-weight: 300;
+  color: rgba(230, 240, 232, 0.62);
+  max-width: 54ch;
+  margin: 28px auto 0;
+}
+.rg-narrow { max-width: 44ch; }
+.rg-inline { color: #e8b96a; font-weight: 400; }
+
+.rg-tag { color: rgba(230, 240, 232, 0.45); margin-bottom: 14px; }
+
+.rg-center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1020px, 86vw);
+  text-align: center;
+}
+.rg-left {
+  left: clamp(26px, 6vw, 96px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(460px, 42vw);
+}
+
+/* annotations pinned around the disc */
+.rg-note {
+  width: min(300px, 34vw);
+}
+.rg-note-a { left: clamp(26px, 7vw, 120px); top: 22%; }
+.rg-note-b { right: clamp(26px, 7vw, 120px); top: 30%; text-align: right; }
+.rg-note-c { left: clamp(26px, 9vw, 150px); bottom: 20%; }
+.rg-note-k { color: #e8b96a; margin-bottom: 8px; }
+.rg-note-v {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  font-weight: 300;
+  color: rgba(232, 238, 232, 0.62);
+}
+
+/* live dendro readout */
+.rg-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 96px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(330px, 62vw);
+  opacity: 0;
+  visibility: hidden;
+  text-align: right;
+  pointer-events: none;
+}
+.rg-readout-k { color: rgba(232, 238, 232, 0.42); }
+.rg-year {
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #f4e7c9;
+  margin: 2px 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+.rg-readout-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(232, 238, 232, 0.13);
+}
+.rg-readout-row .micro { color: rgba(232, 238, 232, 0.42); }
+.rg-readout-v { font-size: 0.82rem; font-weight: 300; color: rgba(240, 244, 238, 0.85); }
+
+/* sensor legend */
+.rg-sensors {
+  left: clamp(26px, 6vw, 96px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(520px, 72vw);
+}
+.rg-sensor {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 4px 12px;
+  padding: 11px 0;
+  border-top: 1px solid rgba(232, 238, 232, 0.12);
+  align-items: baseline;
+}
+.rg-swatch { width: 7px; height: 7px; border-radius: 50%; display: block; }
+.rg-sensor-name { font-size: 0.95rem; font-weight: 400; color: #eef4ee; }
+.rg-sensor-meta { grid-column: 2; color: rgba(232, 238, 232, 0.4); }
+.rg-sensor-reads {
+  grid-column: 2;
+  font-size: 0.84rem;
+  font-weight: 300;
+  color: rgba(232, 238, 232, 0.6);
+  margin-top: 2px;
+}
+
+.rg-metrics {
+  right: clamp(26px, 6vw, 96px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(360px, 62vw);
+}
+.rg-mrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(232, 238, 232, 0.13);
+}
+.rg-mrow .micro { color: rgba(232, 238, 232, 0.44); }
+.rg-mval { font-size: 1.02rem; font-weight: 300; color: #eaf3ea; }
+
+.rg-closer {
+  left: clamp(26px, 6vw, 96px);
+  top: clamp(84px, 15vh, 160px);
+}
+.rg-mark {
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  color: #f2f7f0;
+  letter-spacing: 0.01em;
+}
+.rg-closer-meta { color: rgba(232, 238, 232, 0.42); margin-top: 10px; }
+
+@media (max-width: 820px) {
+  .rg-left, .rg-sensors, .rg-metrics, .rg-closer {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    transform: none;
+  }
+  .rg-metrics { top: auto; bottom: 22vh; }
+  .rg-readout { right: 18px; left: 18px; width: auto; bottom: 40px; }
+  .rg-note { display: none; }
+}
+
+/* keep long-form beats clear of the disc */
+.rg-center.rg-upper {
+  top: 23%;
+  transform: translate(-50%, -50%);
+}
+.rg-center.rg-upper .rg-h1,
+.rg-center.rg-upper .rg-lede {
+  text-shadow: 0 2px 26px rgba(4, 8, 6, 0.9), 0 0 60px rgba(4, 8, 6, 0.7);
+}

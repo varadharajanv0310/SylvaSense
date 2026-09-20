@@ -1,0 +1,127 @@
+/* Deliberately neutral: the selector must not flatter one concept over another.
+   Dark, quiet, typographic; all colour comes from the previews themselves. */
+
+.cx-root {
+  min-height: 100vh;
+  background: #080b09;
+  color: #e6ece6;
+  padding: clamp(28px, 5vw, 70px) clamp(20px, 5vw, 70px) 40px;
+}
+
+.cx-header { border-bottom: 1px solid rgba(230, 236, 230, 0.14); padding-bottom: clamp(26px, 4vw, 48px); }
+.cx-header-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(300px, 460px);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: end;
+}
+.cx-eyebrow { color: rgba(230, 236, 230, 0.44); margin-bottom: 18px; }
+.cx-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5.6vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.cx-note {
+  font-size: 0.88rem;
+  line-height: 1.66;
+  font-weight: 300;
+  color: rgba(230, 240, 232, 0.56);
+  margin: 0;
+}
+
+.cx-list { display: block; }
+
+.cx-row {
+  display: grid;
+  grid-template-columns: 42px minmax(240px, 30vw) 1fr auto;
+  gap: clamp(18px, 3vw, 44px);
+  align-items: center;
+  padding: clamp(20px, 2.6vw, 34px) 0;
+  border-bottom: 1px solid rgba(230, 236, 230, 0.12);
+  transition: background 0.35s ease;
+}
+.cx-row:hover { background: rgba(230, 236, 230, 0.026); }
+
+.cx-row-index { color: rgba(230, 236, 230, 0.34); align-self: start; padding-top: 6px; }
+
+.cx-preview {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b100c;
+}
+.pv-canvas { display: block; width: 100%; height: 100%; }
+.cx-preview-frame {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(230, 236, 230, 0.16);
+  pointer-events: none;
+  transition: border-color 0.35s ease;
+}
+.cx-row:hover .cx-preview-frame { border-color: rgba(230, 236, 230, 0.4); }
+
+.cx-row-name {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1.04;
+  margin: 0 0 12px;
+  letter-spacing: -0.012em;
+}
+.cx-row-line {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(230, 240, 232, 0.6);
+  margin: 0 0 16px;
+  max-width: 54ch;
+}
+.cx-row-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.cx-row-meta .micro { color: rgba(230, 240, 232, 0.5); }
+.cx-dim { color: rgba(230, 240, 232, 0.34) !important; }
+
+.cx-row-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  color: rgba(230, 240, 232, 0.62);
+}
+.cx-arrow { font-size: 1.1rem; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); display: inline-block; }
+.cx-row:hover .cx-arrow { transform: translateX(8px); }
+.cx-row:hover .cx-row-cta { color: #eef5ee; }
+
+.cx-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+}
+
+@media (max-width: 980px) {
+  .cx-header-row { grid-template-columns: 1fr; align-items: start; }
+  .cx-row {
+    grid-template-columns: 30px 1fr;
+    grid-template-areas: 'idx body' 'prev prev' 'cta cta';
+    align-items: start;
+  }
+  .cx-row-index { grid-area: idx; }
+  .cx-row-body { grid-area: body; }
+  .cx-preview { grid-area: prev; margin-top: 16px; }
+  .cx-row-cta { grid-area: cta; margin-top: 14px; }
+}
+
+.cx-divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: clamp(34px, 5vw, 64px) 0 clamp(12px, 2vw, 20px);
+  border-bottom: 1px solid rgba(230, 236, 230, 0.14);
+}
+.cx-divider .micro { color: rgba(230, 240, 232, 0.6); }

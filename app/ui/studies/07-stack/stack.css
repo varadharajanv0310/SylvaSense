@@ -1,0 +1,171 @@
+.sk-root {
+  background: #05080c;
+  color: #e4eef2;
+}
+
+/* ---------- typography ---------- */
+
+.sk-h1 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(2rem, 4.8vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+  margin: 0;
+  color: #f0f7fa;
+}
+.sk-h2 {
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(1.45rem, 2.9vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.026em;
+  margin: 0;
+  color: #f0f7fa;
+}
+.sk-accent { color: #6fd8e8; }
+.sk-lede {
+  font-size: clamp(0.9rem, 1.1vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.66;
+  color: rgba(216, 234, 240, 0.58);
+  max-width: 50ch;
+  margin: 24px auto 0;
+}
+.sk-body {
+  font-size: clamp(0.88rem, 1.06vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: rgba(216, 234, 240, 0.58);
+  max-width: 42ch;
+  margin: 18px 0 0;
+}
+.sk-eyebrow { color: rgba(216, 234, 240, 0.42); margin-bottom: 22px; }
+.sk-tag { color: #6fd8e8; margin-bottom: 14px; }
+
+.sk-centre {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(880px, 86vw);
+  text-align: center;
+}
+.sk-centre-top {
+  left: 50%;
+  top: 24%;
+  transform: translate(-50%, -50%);
+  width: min(880px, 86vw);
+  text-align: center;
+}
+.sk-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(440px, 44vw);
+}
+
+/* the findable slice */
+.sk-event {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 84vw);
+  text-align: center;
+}
+.sk-event-k { color: #7af0b4; margin-bottom: 14px; }
+.sk-event-date {
+  font-size: clamp(2rem, 5.4vw, 4.6rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  color: #eafff4;
+  line-height: 1;
+  text-shadow: 0 2px 44px rgba(0, 0, 0, 0.85);
+}
+.sk-event-note {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(216, 234, 240, 0.62);
+  margin: 20px auto 0;
+  max-width: 40ch;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.9);
+}
+
+/* ---------- observation readout ---------- */
+
+.sk-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(300px, 64vw);
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.sk-date {
+  font-size: clamp(1.7rem, 3.4vw, 3rem);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  color: #f2fafc;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
+}
+.sk-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(228, 238, 242, 0.14);
+}
+.sk-row .micro { color: rgba(216, 234, 240, 0.4); }
+.sk-row-v { font-size: 0.8rem; font-weight: 300; color: #e4eef2; font-variant-numeric: tabular-nums; }
+
+/* ---------- time series ---------- */
+
+.sk-series {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(400px, 74vw);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 4;
+}
+.sk-series-k { color: rgba(216, 234, 240, 0.44); margin-bottom: 10px; }
+.sk-series-canvas {
+  width: 100%;
+  height: 120px;
+  display: block;
+  border: 1px solid rgba(228, 238, 242, 0.14);
+}
+
+.sk-metrics {
+  left: 50%;
+  bottom: clamp(52px, 8vh, 100px);
+  transform: translateX(-50%);
+  width: min(1120px, 90vw);
+}
+.sk-metrics > .beat {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: rgba(111, 216, 232, 0.16);
+  border-top: 1px solid rgba(111, 216, 232, 0.16);
+  border-bottom: 1px solid rgba(111, 216, 232, 0.16);
+}
+.sk-m { background: rgba(5, 8, 12, 0.88); padding: 13px 14px 12px; }
+.sk-m-k { color: rgba(216, 234, 240, 0.45); }
+.sk-m-v { font-size: 0.98rem; font-weight: 300; color: #f0f7fa; margin-top: 6px; }
+
+@media (max-width: 900px) {
+  .sk-left { left: 18px; right: 18px; width: auto; transform: none; top: 20vh; }
+  .sk-readout { right: 18px; top: 84px; transform: none; width: auto; left: 18px; }
+  .sk-series { left: 18px; right: 18px; width: auto; }
+  .sk-metrics { width: 92vw; }
+  .sk-metrics > .beat { grid-template-columns: repeat(3, 1fr); }
+}

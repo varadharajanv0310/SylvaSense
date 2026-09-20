@@ -1,0 +1,867 @@
+/* Shared layout for the merged concepts.
+   Each root sets its own palette and display face; the geometry is common so
+   the four read as one set of pitches rather than four unrelated files. */
+
+.mg-root {
+  --accent: #7af0b4;
+  --ink: #eef5ee;
+  --dim: rgba(232, 242, 234, 0.56);
+  --faint: rgba(232, 242, 234, 0.4);
+  --display: Inter, system-ui, sans-serif;
+  --weight: 200;
+  background: #04070a;
+  color: var(--ink);
+}
+
+.mg-stack-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  will-change: opacity;
+}
+
+/* ---------- typography ---------- */
+
+.mg-h1 {
+  font-family: var(--display);
+  font-weight: var(--weight);
+  font-size: clamp(2rem, 4.8vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: var(--ink);
+}
+.mg-h2 {
+  font-family: var(--display);
+  font-weight: var(--weight);
+  font-size: clamp(1.4rem, 2.9vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+  margin: 0;
+  color: var(--ink);
+}
+.mg-accent { color: var(--accent); }
+.mg-warn { color: #ffb069; }
+.mg-bad { color: #ff6a4d; }
+
+.mg-body {
+  font-size: clamp(0.88rem, 1.06vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.68;
+  color: var(--dim);
+  max-width: 42ch;
+  margin: 20px 0 0;
+}
+.mg-lede {
+  font-size: clamp(0.9rem, 1.1vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.66;
+  color: var(--dim);
+  max-width: 52ch;
+  margin: 24px auto 0;
+}
+.mg-eyebrow { color: var(--faint); margin-bottom: 22px; }
+.mg-tag { color: var(--accent); margin-bottom: 14px; }
+
+/* ---------- placement ---------- */
+
+.mg-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(440px, 44vw);
+  z-index: 5;
+}
+.mg-centre {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 86vw);
+  text-align: center;
+  z-index: 5;
+}
+.mg-top {
+  left: 50%;
+  top: 23%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 86vw);
+  text-align: center;
+  z-index: 5;
+}
+.mg-corner { left: clamp(26px, 6vw, 92px); top: clamp(76px, 12vh, 120px); z-index: 5; }
+
+/* the pivot: the single line that carries the join between two acts */
+.mg-pivot {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1040px, 92vw);
+  text-align: center;
+  z-index: 8;
+}
+.mg-pivot .mg-h1 {
+  font-size: clamp(1.7rem, 3.9vw, 3.7rem);
+  text-shadow: 0 2px 44px rgba(0, 0, 0, 0.92), 0 0 90px rgba(0, 0, 0, 0.7);
+}
+.mg-pivot .mg-lede { text-shadow: 0 1px 26px rgba(0, 0, 0, 0.95); }
+.mg-pivot-rule {
+  width: 46%;
+  height: 1px;
+  margin: 0 auto 30px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.7;
+}
+
+/* ---------- live readout ---------- */
+
+.mg-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(300px, 62vw);
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.mg-readout-hero {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
+}
+.mg-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(232, 242, 234, 0.14);
+}
+.mg-row .micro { color: var(--faint); }
+.mg-row-v {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- metrics ---------- */
+
+.mg-metrics {
+  left: 50%;
+  bottom: clamp(48px, 8vh, 96px);
+  transform: translateX(-50%);
+  width: min(1120px, 90vw);
+  z-index: 6;
+}
+.mg-metrics > .beat {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 5), 1fr);
+  gap: 1px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.mg-m { background: rgba(4, 8, 10, 0.9); padding: 13px 14px 12px; }
+.mg-m-k { color: var(--faint); }
+.mg-m-v {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.98rem;
+  font-weight: 300;
+  color: var(--ink);
+  margin-top: 6px;
+}
+
+/* a strip naming which concepts this merge is made of */
+.mg-lineage {
+  position: fixed;
+  right: 26px;
+  bottom: 54px;
+  z-index: 70;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .mg-left { left: 18px; right: 18px; width: auto; transform: none; top: 20vh; }
+  .mg-readout { right: 18px; left: 18px; width: auto; top: 12vh; transform: none; }
+  .mg-metrics { width: 94vw; }
+  .mg-metrics > .beat { grid-template-columns: repeat(2, 1fr); }
+  .mg-lineage { display: none; }
+}
+
+/* ---------------- merge 11 · The Cube ---------------- */
+
+.cube-root {
+  --accent: #6fd8e8;
+  --ink: #eef7fa;
+  --dim: rgba(216, 234, 240, 0.58);
+  --faint: rgba(216, 234, 240, 0.42);
+  background: #05080c;
+}
+
+.cube-count-wrap {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 4;
+  will-change: transform, opacity;
+}
+.cube-count {
+  font-size: clamp(3.2rem, 11vw, 12rem);
+  font-weight: 200;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 60px rgba(0, 0, 0, 0.72);
+  transition: color 0.4s linear;
+}
+.cube-count-label { color: rgba(226, 240, 240, 0.5); margin-top: 16px; }
+
+.cube-bottom-left {
+  left: clamp(26px, 6vw, 92px);
+  bottom: clamp(56px, 10vh, 118px);
+  width: min(500px, 52vw);
+  z-index: 5;
+}
+.cube-bottom-centre {
+  left: 50%;
+  bottom: clamp(56px, 10vh, 118px);
+  transform: translateX(-50%);
+  width: min(880px, 88vw);
+  text-align: center;
+  z-index: 5;
+}
+.mg-h2-centre { max-width: 26ch; margin: 0 auto; }
+
+.cube-event {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 84vw);
+  text-align: center;
+  z-index: 7;
+}
+.cube-event-k { color: #7af0b4; margin-bottom: 14px; }
+.cube-event-date {
+  font-size: clamp(2rem, 5.4vw, 4.4rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  color: #eafff4;
+  line-height: 1;
+  text-shadow: 0 2px 44px rgba(0, 0, 0, 0.9);
+}
+.cube-event-note {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(216, 234, 240, 0.64);
+  margin: 20px auto 0;
+  max-width: 42ch;
+  text-shadow: 0 1px 22px rgba(0, 0, 0, 0.92);
+}
+
+/* ---------------- merge 14 · The Record ---------------- */
+
+.rc-root {
+  --accent: #e8b96a;
+  --ink: #eef3ec;
+  --dim: rgba(228, 238, 230, 0.58);
+  --faint: rgba(228, 238, 230, 0.42);
+  background: #05100a;
+}
+.rc-stage { perspective: 820px; perspective-origin: 50% 46%; }
+
+.rc-h1 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5.4vw, 5.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
+}
+.rc-h1 em { font-style: italic; color: #c9e6b9; }
+.rc-h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.5vw, 3.2rem);
+  line-height: 1.1;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.rc-num { color: var(--accent); margin-bottom: 12px; }
+.rc-num-dark { color: #8c6a3f; }
+.rc-dark { color: #1b180f; text-shadow: none; }
+.rc-dark em { color: #6a6b3c; }
+.rc-body-dark { color: rgba(40, 36, 24, 0.7); }
+.rc-strong { color: rgba(228, 238, 230, 0.76); }
+.rc-inline { color: var(--accent); }
+
+.rc-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(430px, 42vw);
+  z-index: 7;
+}
+.rc-left-dark { z-index: 9; }
+
+.rc-readout {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  bottom: clamp(56px, 9vh, 110px);
+  width: min(300px, 62vw);
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.rc-readout-k { color: var(--faint); }
+.rc-year {
+  font-size: clamp(2.4rem, 5.4vw, 4.4rem);
+  font-weight: 200;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: #f4e7c9;
+  margin: 2px 0 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rc-zero {
+  font-size: clamp(2.6rem, 9vw, 9rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  color: rgba(226, 238, 252, 0.95);
+  line-height: 1;
+}
+.rc-zero-note { color: rgba(200, 220, 240, 0.44); margin-top: 16px; }
+
+/* ---- the paper act ---- */
+
+/* No preserve-3d here: an opaque parent in a 3D context occludes its own
+   children once they are pushed to negative z. The perspective lives on
+   .rc-world instead, which has no background to hide behind. */
+.rc-paper {
+  position: absolute;
+  inset: 0;
+  background: #efe9dc;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 8;
+}
+.rc-fibre {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)' opacity='0.5'/%3E%3C/svg%3E");
+}
+.rc-world {
+  position: absolute;
+  inset: 0;
+  perspective: 820px;
+  perspective-origin: 50% 46%;
+  transform-style: preserve-3d;
+}
+
+.rc-sheet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -76px;
+  margin-top: -107px;
+  width: 152px;
+  height: 214px;
+  background: #f7f3e8;
+  box-shadow: 0 1px 2px rgba(60, 46, 24, 0.14), 0 14px 32px rgba(60, 46, 24, 0.14);
+  padding: 7px 8px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.rc-sheet-rule { position: absolute; inset: 5px; border: 1px solid rgba(92, 72, 40, 0.28); }
+.rc-leaf {
+  position: absolute;
+  left: 50%;
+  top: 7%;
+  width: 50%;
+  height: 62%;
+  object-fit: contain;
+  transform: translateX(-50%) rotate(-3deg);
+}
+.rc-leaf-vec { opacity: 0; }
+.rc-fields { position: absolute; left: 11px; right: 11px; bottom: 12px; }
+.rc-taxon { font-style: italic; font-size: 10.5px; line-height: 1.12; color: #211d14; }
+.rc-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5.6px;
+  color: rgba(48, 40, 24, 0.62);
+  margin-top: 7px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(92, 72, 40, 0.24);
+}
+.rc-stamp {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(74, 92, 56, 0.9);
+  border: 1px solid rgba(74, 92, 56, 0.55);
+  padding: 2px 4px;
+  transform: rotate(-7deg);
+}
+.rc-stamp-red { color: rgba(140, 59, 42, 0.92); border-color: rgba(140, 59, 42, 0.5); }
+
+.rc-hero {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  width: 290px;
+  height: 408px;
+  padding: 12px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 10;
+}
+.rc-hero .rc-taxon { font-size: 20px; }
+.rc-hero .rc-meta { font-size: 9px; margin-top: 12px; }
+.rc-hero .rc-stamp { font-size: 8px; padding: 4px 7px; right: 16px; top: 20px; }
+.rc-hero .rc-fields { left: 20px; right: 20px; bottom: 20px; }
+.rc-hero .rc-sheet-rule { inset: 8px; }
+
+.rc-m-s { color: rgba(228, 238, 230, 0.34); letter-spacing: 0.1em; margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .rc-left { left: 18px; right: 18px; width: auto; transform: none; top: 18vh; }
+  .rc-readout { right: 18px; left: 18px; width: auto; text-align: left; }
+}
+
+/* ---------- footage composited over a scene (used by merge 12) ---------- */
+
+.mg-fire {
+  position: absolute;
+  inset: -6%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  will-change: opacity, transform;
+  /* feathered so it reads as a fire front, not a rectangle of video */
+  -webkit-mask-image: radial-gradient(130% 88% at 50% 92%, #000 26%, rgba(0, 0, 0, 0.55) 58%, transparent 84%);
+  mask-image: radial-gradient(130% 88% at 50% 92%, #000 26%, rgba(0, 0, 0, 0.55) 58%, transparent 84%);
+}
+.mg-fire-vid {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.25) contrast(1.12);
+}
+
+/* ---------------- merge 12 · Ash and Root ---------------- */
+
+.ar-root {
+  --accent: #e0a765;
+  --ink: #f4ece0;
+  --dim: rgba(244, 236, 224, 0.58);
+  --faint: rgba(244, 236, 224, 0.42);
+  background: #080705;
+}
+.ar-hero {
+  font-size: clamp(2.2rem, 7vw, 7rem);
+  color: #f5f2ea;
+  text-shadow: 0 2px 44px rgba(0, 0, 0, 0.72);
+}
+.ar-warm { color: #ffd9a8; }
+.ar-hot {
+  color: #ffb069;
+  text-shadow: 0 0 66px rgba(255, 96, 20, 0.45), 0 2px 32px rgba(0, 0, 0, 0.7);
+}
+.ar-amber { color: #e0a765; }
+.ar-cyan { color: #6fe8d8; }
+.ar-dim { color: rgba(244, 236, 224, 0.5); }
+.ar-huge {
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  line-height: 0.86;
+  margin: 6px 0 12px;
+}
+.ar-right {
+  right: clamp(26px, 6vw, 92px);
+  top: 74%;
+  transform: translateY(-50%);
+  width: min(380px, 38vw);
+  text-align: right;
+  z-index: 6;
+}
+
+/* ---------------- merge 13 · The Return ---------------- */
+
+.tr-root {
+  --accent: #8fe8de;
+  --ink: #eef6f2;
+  --dim: rgba(232, 244, 238, 0.58);
+  --faint: rgba(232, 244, 238, 0.42);
+  background: #0d211d;
+}
+.tr-lime { color: #a8d86a; }
+/* pushed down so the Landsat panel above it has air */
+.tr-root .mg-readout { top: 58%; }
+
+@media (max-width: 900px) {
+  .ar-right { left: 18px; right: 18px; width: auto; transform: none; text-align: left; top: auto; bottom: 24vh; }
+}
+
+/* ---------- footage masked inside the typography (merge 12) ---------- */
+
+.mg-typemask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 5;
+  will-change: opacity, transform;
+  filter: drop-shadow(0 0 54px rgba(255, 92, 16, 0.4));
+}
+
+/* the lede sits bottom-left, clear of both the masked headline and the counter */
+.ar-under {
+  left: clamp(26px, 6vw, 92px);
+  top: auto;
+  bottom: clamp(88px, 13vh, 150px);
+  width: min(400px, 38vw);
+  z-index: 6;
+}
+.ar-under .mg-lede {
+  margin: 0;
+  max-width: 40ch;
+  color: rgba(255, 244, 232, 0.9);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 34px rgba(0, 0, 0, 0.85);
+}
+
+/* ---------- sound toggle ---------- */
+
+.mg-sound {
+  position: fixed;
+  left: clamp(26px, 6vw, 92px);
+  bottom: clamp(26px, 5vh, 54px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 14px 8px;
+  background: rgba(6, 8, 6, 0.6);
+  border: 1px solid rgba(224, 167, 101, 0.28);
+  color: rgba(244, 236, 224, 0.62);
+  cursor: pointer;
+  z-index: 40;
+  backdrop-filter: blur(7px);
+  transition: border-color 0.3s, color 0.3s;
+}
+.mg-sound:hover { border-color: rgba(224, 167, 101, 0.6); color: #f4ece0; }
+.mg-sound-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(244, 236, 224, 0.3);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.mg-sound-on { background: #e0a765; box-shadow: 0 0 10px rgba(224, 167, 101, 0.8); }
+
+@media (max-width: 900px) {
+  .ar-under { left: 18px; right: 18px; width: auto; bottom: 30vh; }
+  .mg-sound { left: 18px; bottom: 18px; }
+}
+
+/* ---------- scroll-scrubbed Landsat sequence (merge 13) ---------- */
+
+.tr-scrub {
+  position: absolute;
+  right: clamp(26px, 6vw, 92px);
+  top: 8%;
+  width: min(272px, 27vw);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 6;
+  border: 1px solid rgba(143, 232, 222, 0.28);
+  background: rgba(6, 14, 14, 0.7);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+  will-change: opacity;
+}
+.tr-scrub-vid {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(1.12) contrast(1.06);
+}
+.tr-scrub-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px 7px;
+  border-top: 1px solid rgba(143, 232, 222, 0.22);
+}
+.tr-scrub-k { color: rgba(232, 244, 238, 0.44); }
+.tr-scrub-y {
+  font-size: 0.96rem;
+  font-weight: 300;
+  color: #8fe8de;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .tr-scrub { right: 18px; left: 18px; width: auto; top: auto; bottom: 26vh; }
+}
+
+/* ---------- shared additions for merges 15–19 ---------- */
+
+.mg-bottom-left {
+  left: clamp(26px, 6vw, 92px);
+  bottom: clamp(120px, 20vh, 220px);
+  width: min(420px, 42vw);
+  z-index: 5;
+}
+
+/* ---------------- merge 15 · The Silent Alarm ---------------- */
+
+.sa-root {
+  --accent: #7af0b4;
+  --ink: #eaf6ef;
+  --dim: rgba(222, 240, 230, 0.58);
+  --faint: rgba(222, 240, 230, 0.42);
+  background: #04100a;
+}
+.sa-traces {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  will-change: opacity;
+}
+/* the waveform stack owns the right half, so the instrument moves out of its way */
+.sa-root .mg-readout {
+  left: clamp(26px, 6vw, 92px);
+  right: auto;
+  top: clamp(92px, 14vh, 150px);
+  transform: none;
+  text-align: left;
+}
+.sa-cyan { color: #8fd8f0; }
+.sa-zero {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  color: #ff6a4d;
+}
+
+/* ---------------- merge 16 · Both Directions ---------------- */
+
+.bd-root {
+  --accent: #e8b96a;
+  --ink: #f2ede1;
+  --dim: rgba(238, 232, 218, 0.58);
+  --faint: rgba(238, 232, 218, 0.42);
+  background: #120d07;
+}
+.bd-h1 {
+  font-size: clamp(2rem, 4.6vw, 4.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  margin: 0;
+  color: #f7f1e4;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
+}
+.bd-h1 em { font-style: italic; color: #e8b96a; }
+.bd-h2 {
+  font-size: clamp(1.4rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+  margin: 0;
+  color: #f7f1e4;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.8);
+}
+.bd-lime { color: #a8d86a; }
+.bd-dir {
+  color: var(--faint);
+  display: block;
+  margin-bottom: 10px;
+}
+.bd-m-s { color: rgba(238, 232, 218, 0.34); letter-spacing: 0.1em; margin-top: 4px; }
+
+/* ---------------- merge 17 · Tinderbox ---------------- */
+
+.tb-root {
+  --accent: #ffb069;
+  --ink: #f5efe6;
+  --dim: rgba(244, 238, 228, 0.58);
+  --faint: rgba(244, 238, 228, 0.42);
+  background: #07100f;
+}
+.tb-cyan { color: #8fe8de; }
+.tb-hot {
+  color: #ffb069;
+  text-shadow: 0 0 60px rgba(255, 96, 20, 0.4), 0 2px 30px rgba(0, 0, 0, 0.7);
+}
+.tb-hero {
+  font-size: clamp(1.9rem, 5.6vw, 5.4rem);
+  line-height: 0.92;
+  color: #ffc48a;
+}
+.tb-huge {
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  line-height: 0.86;
+  margin: 6px 0 12px;
+}
+.tb-dim { color: rgba(244, 238, 228, 0.5); }
+.tb-k { color: var(--faint); display: block; margin-bottom: 10px; }
+.tb-right {
+  right: clamp(26px, 6vw, 92px);
+  top: 26%;
+  width: min(360px, 36vw);
+  text-align: right;
+  z-index: 6;
+}
+
+/* ---------------- merge 18 · Type Specimen ---------------- */
+
+.ty-root {
+  --accent: #e8d9b0;
+  --ink: #eef4ec;
+  --dim: rgba(230, 240, 230, 0.58);
+  --faint: rgba(230, 240, 230, 0.42);
+  background: #060c08;
+}
+.ty-h1 {
+  font-size: clamp(1.9rem, 4.4vw, 4.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+.ty-h1 em { font-style: italic; }
+.ty-h2 {
+  font-size: clamp(1.3rem, 2.8vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.014em;
+  margin: 0;
+}
+.ty-h2 em { font-style: italic; }
+.ty-num { color: rgba(92, 72, 40, 0.72); margin-bottom: 12px; }
+.ty-eyebrow-dark { color: rgba(60, 52, 32, 0.6); }
+/* warm, so it separates from the green canopy the pivot sits on */
+.ty-hi { color: #ffd9a8; }
+.ty-left {
+  left: clamp(26px, 6vw, 92px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(400px, 40vw);
+  z-index: 9;
+}
+.ty-bottom {
+  left: 50%;
+  bottom: clamp(56px, 10vh, 120px);
+  transform: translateX(-50%);
+  width: min(620px, 84vw);
+  text-align: center;
+  z-index: 9;
+}
+.ty-count-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 5;
+  will-change: opacity, transform;
+}
+.ty-count {
+  font-size: clamp(2.4rem, 8vw, 7.5rem);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 50px rgba(0, 0, 0, 0.8);
+}
+.ty-count-label { color: rgba(230, 240, 230, 0.5); margin-top: 16px; }
+.ty-m-s { color: rgba(230, 240, 230, 0.34); letter-spacing: 0.1em; margin-top: 4px; }
+
+/* ---------------- merge 19 · Below the Record ---------------- */
+
+.br-root {
+  --accent: #78c8d7;
+  --ink: #e6eef2;
+  --dim: rgba(224, 238, 244, 0.58);
+  --faint: rgba(224, 238, 244, 0.42);
+  background: #04080c;
+}
+.br-cyan { color: #78c8d7; }
+.br-amber { color: #e0a765; }
+.br-dim { color: rgba(228, 238, 242, 0.5); }
+.br-axis { color: var(--faint); display: block; margin-bottom: 10px; }
+.br-huge {
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 0.84;
+  margin: 6px 0 12px;
+}
+.br-right {
+  right: clamp(26px, 6vw, 92px);
+  top: 24%;
+  width: min(340px, 34vw);
+  text-align: right;
+  z-index: 6;
+}
+.br-m-s { color: rgba(228, 238, 242, 0.34); letter-spacing: 0.1em; margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .mg-bottom-left { left: 18px; right: 18px; width: auto; bottom: 26vh; }
+  .sa-root .mg-readout { left: 18px; right: 18px; width: auto; top: 10vh; }
+  .ty-left, .ty-bottom {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    transform: none;
+    top: 18vh;
+    bottom: auto;
+    text-align: left;
+  }
+  .tb-right, .br-right {
+    left: 18px;
+    right: 18px;
+    width: auto;
+    text-align: left;
+    top: auto;
+    bottom: 26vh;
+  }
+}
