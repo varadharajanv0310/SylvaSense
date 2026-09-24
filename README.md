@@ -12,7 +12,7 @@ node scripts/run-framework.mjs build
 node scripts/preview.mjs
 ```
 
-Development: `http://localhost:5173/`. Static production preview: `http://127.0.0.1:4173/`. Build output: `dist/client`. React 19, TypeScript, Vinext/Vite, Three.js and custom GLSL. No backend, sign-in flow, live satellite feed, or ML inference.
+Development: `http://localhost:5173/`. Static production preview: `http://127.0.0.1:4173/`. Build output: `dist/client`. React 19, TypeScript, Vinext/Vite, Three.js and custom GLSL. There is a Python backend now — see **Current state** below and `backend/README.md`; the flagship itself still renders without it.
 
 ## Implementation map
 
@@ -24,7 +24,7 @@ Development: `http://localhost:5173/`. Static production preview: `http://127.0.
 
 ## Controls and accessibility
 
-Scroll normally in either direction. Index buttons jump to chapters; the skip link moves directly to observation. Optical/SAR/LiDAR, cloud cover, crown selection, biomass/carbon, and the 2020–2025 timeline update the actual visualization. The crown-inspection button is the keyboard alternative to picking the canvas. Marking A–17 is a reversible browser-only demonstration state.
+Scroll normally in either direction. Index buttons jump to chapters; the skip link moves directly to observation. Optical/SAR/LiDAR, cloud cover, crown selection, biomass/carbon, and the 2020–2025 timeline update the actual visualization. The crown-inspection button is the keyboard alternative to picking the canvas.
 
 Reduced-motion preferences disable ambient motion and inertial interpolation. The study notes provide an explicit full-motion opt-in. Navigation transfers focus to the destination heading; Escape dismisses notes/index and restores their trigger. Inactive content is inert and hidden from assistive technology. Native range inputs retain arrow-key support. A photographic fallback preserves the narrative and controls when WebGL initialization or context fails.
 
@@ -101,3 +101,46 @@ Reach them from the flagship's **Index → Scroll studies**, or go straight to `
 
 Figures in the studies are plausible illustrative data for a ~1.18 Mha monitoring cell, not
 measurements — the same standard the flagship holds itself to.
+
+---
+
+## Current state
+
+The flagship is no longer the whole application. Three things have been built on
+top of it, and a fourth sits beside it.
+
+**A Python backend** (`backend/`, FastAPI). Real Sentinel-1/2 via STAC windowed
+COG reads, GEDI L4A footprints over lazy HTTP range reads, split-conformal
+biomass intervals whose coverage is measured on spatially blocked folds, and a
+RADD-style Bayesian disturbance detector. `backend/README.md` is the honest
+account, including what is measured and what is not — read it before changing
+anything under `backend/sylvasense/`.
+
+**Two pages that use it.** `/record` presents a stored run; `/console`
+(`app/ui/console/`) runs a new one, including an image upload that refuses a
+non-georeferenced file rather than guessing at its extent. Both degrade to
+captured runs when the API is unreachable, so neither can show a blank screen
+to a judge.
+
+**The pitch deck**, built from the organisers' own `ORION_1.0_Template.pptx`:
+
+```sh
+python scripts/deck/build.py        # template -> Order_of_One_ORION1.0_v2.pptx
+python scripts/deck/export_pdf.py   # PowerPoint over COM -> the matching PDF
+```
+
+Copy is in `scripts/deck/deck_content.py`. The build only ever *adds* — all 33
+template shapes survive unmoved, and only slide 1's four prescribed fields are
+filled. The PDF must come from `export_pdf.py`: an earlier script rendered an
+approximation from background plates, and the two files silently disagreed for
+several commits. Never reintroduce a stand-in that can drift.
+
+**Deployed** at <https://sylvasense-orion.vercel.app> (static export, so the
+deployed site reads captured runs rather than the live API).
+
+### Not in the repo
+
+`backend/.env` holds an Earthdata bearer token and is gitignored — GEDI calls
+fail without it. `backend/.venv/` and `node_modules/` are local. The deck build
+reads the template from `~/Downloads/ORION_1.0_Template.pptx`, overridable with
+`ORION_TEMPLATE`, and `export_pdf.py` needs PowerPoint installed.
